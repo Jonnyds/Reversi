@@ -102,9 +102,9 @@ void GameFlow::play() {
                     break;
             }
 
-            for (i = 0; i < 8; ++i) { // for each direction.
-                moves->make_move(i, x, y); //makes the move (changes discs on board).
-            }
+
+                moves->make_move(x, y); //makes the move (changes discs on board).
+
             // switch turn.
             switch (turn) {
                 case X:

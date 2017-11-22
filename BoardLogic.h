@@ -49,7 +49,7 @@ public:
      * @param j the row index of the new disc added by the player (changes within the funcation).
      * @param k the column index of the new disc added by the player (changes within the funcation).
      */
-    void make_move(const int &i, int j, int k);
+    void make_move(int j, int k);
 
     /**
      * Changes the discs which need to be flipped to the current player's turn symbol.

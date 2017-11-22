@@ -101,72 +101,99 @@ void BoardLogic::check_direction(const int &i, int &j, int &k) {
     }
 }
 
-void BoardLogic::make_move(const int &i, int j, int k) {
+void BoardLogic::make_move(int j, int k) {
     int count = 0;
-    while (!is_board_end(j, k)) {
+    int jsave = j;
+    int ksave = k;
 
-        if (is_empty(j, k) && count == 0) {
-            break;
-        }
+    for (int i = 0; i < 8; ++i) { // for each direction.
 
-        if (is_opponent(j, k)) {
-            count++;
-        }
+       j = jsave;
+       k = ksave;
+        count = 0;
+        while (!is_board_end(j, k)) {
 
-        if (board->get_board()[j][k].get_sym() == player_turn.get_symbol() && count > 0) {
-            for (int l = 0; l <count ; ++l) { // runs back in each direction and changes the discs to the player's type discs.
-                switch (i) {
-                    case 0: j--;
-                        add_to_board(j,k);
-                        break;
-                    case 1: j--, k--;
-                        add_to_board(j,k);
-                        break;
-                    case 2: k--;
-                        add_to_board(j,k);
-                        break;
-                    case 3: j++, k--;
-                        add_to_board(j,k);
-                        break;
-                    case 4: j++;
-                        add_to_board(j,k);
-                        break;
-                    case 5: j++, k++;
-                        add_to_board(j,k);
-                        break;
-                    case 6: k++;
-                        add_to_board(j,k);
-                        break;
-                    case 7: j--, k++;
-                        add_to_board(j,k);
-                        break;
-                    default:break;
-                }
-
+            if (is_empty(j, k) && count == 0) {
+                break;
             }
-            break;
-        }
 
-        switch (i) { // checks the directions.
-            case 0: j++;
-                break;
-            case 1: j++, k++;
-                break;
-            case 2: k++;
-                break;
-            case 3: j--, k++;
-                break;
-            case 4: j--;
-                break;
-            case 5: j--, k--;
-                break;
-            case 6: k--;
-                break;
-            case 7: j++, k--;
-                break;
-            default:break;
-        }
+            if (is_opponent(j, k)) {
+                count++;
+            }
 
+            if (board->get_board()[j][k].get_sym() == player_turn.get_symbol() && count > 0) {
+                for (int l = 0; l < count; ++l) { // runs back in each direction and changes the discs to the player's type discs.
+                    switch (i) {
+                        case 0:
+                            j--;
+                            add_to_board(j, k);
+                            break;
+                        case 1:
+                            j--, k--;
+                            add_to_board(j, k);
+                            break;
+                        case 2:
+                            k--;
+                            add_to_board(j, k);
+                            break;
+                        case 3:
+                            j++, k--;
+                            add_to_board(j, k);
+                            break;
+                        case 4:
+                            j++;
+                            add_to_board(j, k);
+                            break;
+                        case 5:
+                            j++, k++;
+                            add_to_board(j, k);
+                            break;
+                        case 6:
+                            k++;
+                            add_to_board(j, k);
+                            break;
+                        case 7:
+                            j--, k++;
+                            add_to_board(j, k);
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+                break;
+            }
+
+            switch (i) { // checks the directions.
+                case 0:
+                    j++;
+                    break;
+                case 1:
+                    j++, k++;
+                    break;
+                case 2:
+                    k++;
+                    break;
+                case 3:
+                    j--, k++;
+                    break;
+                case 4:
+                    j--;
+                    break;
+                case 5:
+                    j--, k--;
+                    break;
+                case 6:
+                    k--;
+                    break;
+                case 7:
+                    j++, k--;
+                    break;
+                default:
+                    break;
+            }
+
+        }
     }
 }
 
