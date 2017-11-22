@@ -15,6 +15,7 @@ GameFlow::GameFlow(const int &n) {
     white = Player(O);
     black = Player(X);
     turn = X;
+    no_more_moves = 0;
 }
 
 void GameFlow::init_game() {
@@ -23,13 +24,12 @@ void GameFlow::init_game() {
 
 void GameFlow::play() {
     int i;
-    int no_more_moves = 0;
     int x = 0, y = 0;
     bool move_found;
-    int total_disc = static_cast<int>(white.get_disc_list().size() + black.get_disc_list().size());
+
     vector<coordinates> possible_moves;
 
-    while (total_disc != pow(playing_board->get_size() - 1, 2) && no_more_moves != 2) {
+    while (!isGameOver()) {
         move_found = false;
 
         playing_board->print();
@@ -135,6 +135,15 @@ void GameFlow::play() {
             cout << "It's a tie";
         }
     }
+}
+
+bool GameFlow::isGameOver() {
+
+    int total_disc = static_cast<int>(white.get_disc_list().size() + black.get_disc_list().size());
+    if (total_disc != pow(playing_board->get_size() - 1, 2) && (no_more_moves != 2)) {
+        return false;
+    }
+    return true;
 }
 
 GameFlow::~GameFlow() {

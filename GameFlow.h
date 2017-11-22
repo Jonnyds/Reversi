@@ -31,6 +31,8 @@ public:
      */
     void play();
 
+    bool isGameOver();
+
     /**
      * GameFlow object destructor.
      */
@@ -41,6 +43,7 @@ private:
     Player black; // The black player (with symbol X).
     Player white; // The white player (with symbol O).
     DiscSymbol turn; // Which player does the turn belong to.
+    int no_more_moves;
 
 };
 
