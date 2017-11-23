@@ -25,7 +25,7 @@ public:
  * @param opponent the opponent of the player currently in turn.
  * @param turn who does tht turn belong to.
  */
-    BoardLogic(Board *game_board,Player &player,Player &opponent, const DiscSymbol &turn);
+    BoardLogic(Board *game_board,Player &player,Player &opponent);
 
     /**
      * Checks the coordinates of the moves the current player (in turn) can make.
@@ -49,7 +49,7 @@ public:
      * @param j the row index of the new disc added by the player (changes within the funcation).
      * @param k the column index of the new disc added by the player (changes within the funcation).
      */
-    void make_move(int j, int k);
+    void flipping(int j, int k);
 
     /**
      * Changes the discs which need to be flipped to the current player's turn symbol.
@@ -100,7 +100,6 @@ private:
     Player &player_turn; // The player that the turn belongs to.
     Player &player_opponent; // the opponent.
     vector<coordinates> velid_points; // the vector holding the coordinates of the valid moves the player can make.
-    DiscSymbol turn; // the symbol of the player which the turn belongs to.
 };
 
 
