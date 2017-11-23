@@ -39,9 +39,9 @@ void GameFlow::play() {
         BoardLogic *moves;
 
         if (turn == white.get_symbol()) {
-            moves = new BoardLogic(playing_board, white, black, turn);
+            moves = new BoardLogic(playing_board, white, black);
         } else {
-            moves = new BoardLogic(playing_board, black, white, turn);
+            moves = new BoardLogic(playing_board, black, white);
         }
 
         possible_moves = moves->valid_moves(); // checks the valid moves.
@@ -103,7 +103,7 @@ void GameFlow::play() {
             }
 
 
-                moves->make_move(x, y); //makes the move (changes discs on board).
+            moves->flipping(x, y); //makes the move (changes discs on board).
 
             // switch turn.
             switch (turn) {
@@ -126,15 +126,7 @@ void GameFlow::play() {
     }
 
     //win massage.
-    if (white.get_disc_list().size() > black.get_disc_list().size()) {
-        cout << "The white player is the winner";
-    } else {
-        if (white.get_disc_list().size() < black.get_disc_list().size()) {
-            cout << "The black player is the winner";
-        } else {
-            cout << "It's a tie";
-        }
-    }
+    winMassege();
 }
 
 bool GameFlow::isGameOver() {
@@ -144,6 +136,18 @@ bool GameFlow::isGameOver() {
         return false;
     }
     return true;
+}
+
+void GameFlow::winMassege() {
+    if (white.get_disc_list().size() > black.get_disc_list().size()) {
+        cout << "The white player is the winner";
+    } else {
+        if (white.get_disc_list().size() < black.get_disc_list().size()) {
+            cout << "The black player is the winner";
+        } else {
+            cout << "It's a tie";
+        }
+    }
 }
 
 GameFlow::~GameFlow() {
