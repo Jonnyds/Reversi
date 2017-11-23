@@ -5,8 +5,8 @@
 
 #include "BoardLogic.h"
 
-BoardLogic::BoardLogic(Board *game_board,  Player &player, Player &opponent) :
-        player_turn(player), board(game_board), player_opponent(opponent){
+BoardLogic::BoardLogic(Board *game_board,  Player &player, Player &opponent, const DiscSymbol &turn) :
+        player_turn(player), board(game_board), turn(turn), player_opponent(opponent){
 }
 
 vector<coordinates> BoardLogic::valid_moves() {
@@ -26,7 +26,7 @@ vector<coordinates> BoardLogic::valid_moves() {
 
 void BoardLogic::add_to_board(int i, int j) {
     Disc d;
-    d = Disc(player_turn.get_symbol(),i,j);
+    d = Disc(turn,i,j);
     board->add_to_board(d,i,j);
     player_opponent.remove_disc(d);
     player_turn.add_disc(d);
@@ -101,101 +101,99 @@ void BoardLogic::check_direction(const int &i, int &j, int &k) {
     }
 }
 
-void BoardLogic::flipping(int j, int k) {
-
+void BoardLogic::make_move(int j, int k) {
     int count = 0;
     int jsave = j;
     int ksave = k;
 
     for (int i = 0; i < 8; ++i) { // for each direction.
+        count = 0;
+        j = jsave;
+        k = ksave;
 
-       j = jsave;
-       k = ksave;
-       count = 0;
+    while (!is_board_end(j, k)) {
 
-        while (!is_board_end(j, k)) {
-
-            if (is_empty(j, k) && count == 0) {
-                break;
-            }
-
-            if (is_opponent(j, k)) {
-                count++;
-            }
-
-            if (board->get_board()[j][k].get_sym() == player_turn.get_symbol() && count > 0) {
-                for (int l = 0; l < count; ++l) { // runs back in each direction and changes the discs to the player's type discs.
-                    switch (i) {
-                        case 0:
-                            j--;
-                            add_to_board(j, k);
-                            break;
-                        case 1:
-                            j--, k--;
-                            add_to_board(j, k);
-                            break;
-                        case 2:
-                            k--;
-                            add_to_board(j, k);
-                            break;
-                        case 3:
-                            j++, k--;
-                            add_to_board(j, k);
-                            break;
-                        case 4:
-                            j++;
-                            add_to_board(j, k);
-                            break;
-                        case 5:
-                            j++, k++;
-                            add_to_board(j, k);
-                            break;
-                        case 6:
-                            k++;
-                            add_to_board(j, k);
-                            break;
-                        case 7:
-                            j--, k++;
-                            add_to_board(j, k);
-                            break;
-                        default:
-                            break;
-                    }
-
-                }
-                break;
-            }
-
-            switch (i) { // checks the directions.
-                case 0:
-                    j++;
-                    break;
-                case 1:
-                    j++, k++;
-                    break;
-                case 2:
-                    k++;
-                    break;
-                case 3:
-                    j--, k++;
-                    break;
-                case 4:
-                    j--;
-                    break;
-                case 5:
-                    j--, k--;
-                    break;
-                case 6:
-                    k--;
-                    break;
-                case 7:
-                    j++, k--;
-                    break;
-                default:
-                    break;
-            }
-
+        if (is_empty(j, k) && count == 0) {
+            break;
         }
+
+        if (is_opponent(j, k)) {
+            count++;
+        }
+
+        if (board->get_board()[j][k].get_sym() == player_turn.get_symbol() && count > 0) {
+            for (int l = 0; l < count; ++l) { // runs back in each direction and changes the discs to the player's type discs.
+                switch (i) {
+                    case 0:
+                        j--;
+                        add_to_board(j, k);
+                        break;
+                    case 1:
+                        j--, k--;
+                        add_to_board(j, k);
+                        break;
+                    case 2:
+                        k--;
+                        add_to_board(j, k);
+                        break;
+                    case 3:
+                        j++, k--;
+                        add_to_board(j, k);
+                        break;
+                    case 4:
+                        j++;
+                        add_to_board(j, k);
+                        break;
+                    case 5:
+                        j++, k++;
+                        add_to_board(j, k);
+                        break;
+                    case 6:
+                        k++;
+                        add_to_board(j, k);
+                        break;
+                    case 7:
+                        j--, k++;
+                        add_to_board(j, k);
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            break;
+        }
+
+        switch (i) { // checks the directions.
+            case 0:
+                j++;
+                break;
+            case 1:
+                j++, k++;
+                break;
+            case 2:
+                k++;
+                break;
+            case 3:
+                j--, k++;
+                break;
+            case 4:
+                j--;
+                break;
+            case 5:
+                j--, k--;
+                break;
+            case 6:
+                k--;
+                break;
+            case 7:
+                j++, k--;
+                break;
+            default:
+                break;
+        }
+    }
+
     }
 }
 
