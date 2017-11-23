@@ -3,8 +3,7 @@
  * ID: 203672910
  */
 
-#include "Player.h"
-#include "Board.h"
+#include "BoardLogic.h"
 
 #ifndef REVERSI_GAMEFLOW_H
 #define REVERSI_GAMEFLOW_H

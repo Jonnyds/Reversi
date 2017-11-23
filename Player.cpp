@@ -4,7 +4,6 @@
  */
 
 #include "Player.h"
-#include<iostream>
 using namespace std;
 
 Player::Player(const DiscSymbol sym): PlayerType(sym){
@@ -36,6 +35,7 @@ DiscSymbol Player::get_symbol(){
 }
 
 Player::Player() {};
+
 
 
 

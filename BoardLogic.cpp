@@ -5,8 +5,8 @@
 
 #include "BoardLogic.h"
 
-BoardLogic::BoardLogic(Board *game_board,  Player &player, Player &opponent, const DiscSymbol &turn) :
-        player_turn(player), board(game_board), turn(turn), player_opponent(opponent){
+BoardLogic::BoardLogic(Board *game_board,  Player &player, Player &opponent) :
+        player_turn(player), board(game_board), player_opponent(opponent){
 }
 
 vector<coordinates> BoardLogic::valid_moves() {
@@ -26,7 +26,7 @@ vector<coordinates> BoardLogic::valid_moves() {
 
 void BoardLogic::add_to_board(int i, int j) {
     Disc d;
-    d = Disc(turn,i,j);
+    d = Disc(player_turn.get_symbol(),i,j);
     board->add_to_board(d,i,j);
     player_opponent.remove_disc(d);
     player_turn.add_disc(d);
@@ -101,7 +101,7 @@ void BoardLogic::check_direction(const int &i, int &j, int &k) {
     }
 }
 
-void BoardLogic::make_move(int j, int k) {
+void BoardLogic::flipping(int j, int k) {
     int count = 0;
     int jsave = j;
     int ksave = k;
