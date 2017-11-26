@@ -43,8 +43,8 @@ public:
 
 private:
     Board* playing_board; // The game's board object.
-    Player black; // The black player (with symbol X).
-    Player white; // The white player (with symbol O).
+    PlayerHuman black; // The black player (with symbol X).
+    PlayerHuman white; // The white player (with symbol O).
     DiscSymbol turn; // Which player does the turn belong to.
     int no_more_moves;
 

@@ -5,7 +5,7 @@
 
 #include "BoardLogic.h"
 
-BoardLogic::BoardLogic(Board *game_board,  Player &player, Player &opponent) :
+BoardLogic::BoardLogic(Board *game_board,  PlayerHuman &player, PlayerHuman &opponent) :
         player_turn(player), board(game_board), player_opponent(opponent){
 }
 

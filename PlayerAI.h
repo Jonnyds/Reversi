@@ -1,36 +1,26 @@
-/*
- * name: Jonathan Schwarz
- * ID: 203672910
- */
+//
+// Created by sahar on 11/26/17.
+//
+
+#ifndef EX2_PLAYERAI_H
+#define EX2_PLAYERAI_H
 
 
-#include <vector>
-#include "Disc.h"
 #include "PlayerType.h"
 
-using namespace std;
-
-#ifndef REVERSI_PLAYER_H
-#define REVERSI_PLAYER_H
-
-/**
- * This object inherits from PlayerType (an abstract class) and in responsible for managing the human player's
- * members and implementation of PlayerType.
- */
-class Player: public PlayerType {
-
+class PlayerAI: public PlayerType {
 public:
 
     /**
      * A human player's constructor.
      * @param sym the player's symbol.
      */
-    explicit Player(DiscSymbol sym);
+    explicit PlayerAI(DiscSymbol sym);
 
     /**
      * A default human player's constructor.
      */
-    Player();
+    PlayerAI();
 
     /**
      * Adds a disc to a player's list.
@@ -54,7 +44,11 @@ public:
      */
     DiscSymbol get_symbol();
 
+    void makeMove(BoardLogic &bl);
+
 };
 
 
-#endif //REVERSI_PLAYER_H
+
+
+#endif //EX2_PLAYERAI_H

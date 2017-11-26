@@ -23,10 +23,11 @@ public:
 
     PlayerType() {};
 
-    virtual void add_disc(const Disc &d) = 0;
-    virtual void remove_disc(const Disc &d) = 0;
-    virtual vector <Disc> get_disc_list() = 0;
-    virtual DiscSymbol get_symbol() = 0;
+    void add_disc(const Disc &d);
+    void remove_disc(const Disc &d);
+    vector <Disc> get_disc_list();
+    DiscSymbol get_symbol();
+    virtual void makeMove(BoardLogic &bl) = 0;
 
 protected:
     DiscSymbol symbol; //The player's symbol.

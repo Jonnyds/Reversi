@@ -11,8 +11,8 @@ using namespace std;
 
 GameFlow::GameFlow(const int &n) {
     playing_board = new Board(n);
-    white = Player(O);
-    black = Player(X);
+    white = PlayerHuman(O);
+    black = PlayerHuman(X);
     turn = X;
     no_more_moves = 0;
 }

@@ -3,7 +3,7 @@
  * ID: 203672910
  */
 
-#include "Player.h"
+#include "PlayerHuman.h"
 
 #include <iostream>
 using namespace std;
@@ -36,7 +36,7 @@ public:
     * @param white recieves the white player signed 'O'.
     * @param black recieves the black player signed 'X'.
     */
-    void init(Player &white, Player &black);
+    void init(PlayerHuman &white, PlayerHuman &black);
 
     /**
      * Adds a disc object to the board.

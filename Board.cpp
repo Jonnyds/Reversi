@@ -5,6 +5,7 @@
 
 #include "Board.h"
 
+
 Board::Board(const int &n) : size(n+1){
     board = new Disc*[size]; // Creating a one dimensional pointers array (of type disc).
     for (int i = 0; i < size; ++i) {
@@ -48,7 +49,7 @@ Disc **Board::get_board() {
     return board;
 }
 
-void Board::init( Player &white, Player &black) {
+void Board::init( PlayerHuman &white, PlayerHuman &black) {
     /**
      * Creating the first four discs.
      */
