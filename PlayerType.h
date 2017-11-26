@@ -3,12 +3,14 @@
  * ID: 203672910
  */
 
+class BoardLogic;
+
 #include "Disc.h"
 #include <vector>
 using namespace std;
 
-#ifndef EX2_PLAYERTYPE_H
-#define EX2_PLAYERTYPE_H
+#ifndef REVERSI_PLAYERTYPE_H
+#define REVERSI_PLAYERTYPE_H
 /*
  * An abstract class to all types of players.
  */
@@ -32,4 +34,4 @@ protected:
     int counter; //The number of discs the player has of board.
 };
 
-#endif //EX2_PLAYERTYPE_H
+#endif //REVERSI_PLAYERTYPE_H

@@ -3,8 +3,8 @@
  * ID: 203672910
  */
 
-#include "BoardLogic.h"
 
+#include "BoardLogic.h"
 #ifndef REVERSI_GAMEFLOW_H
 #define REVERSI_GAMEFLOW_H
 /**
@@ -31,6 +31,8 @@ public:
     void play();
 
     void winMassege();
+
+    void switchTurn(bool no_moves);
 
     bool isGameOver();
 

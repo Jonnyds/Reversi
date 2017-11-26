@@ -46,21 +46,10 @@ void GameFlow::play() {
         possible_moves = moves->valid_moves(); // checks the valid moves.
 
         if (possible_moves.empty()) { // check if both players have no more moves then the game ends.
+
             no_more_moves++;
-            switch (turn) {
-                case X:
-                    turn = O;
-                    cout << "No possible moves - switching turn" << endl;
-                    cout << "It's the white player's turn \n" << endl;
-                    break;
-                case O:
-                    cout << "No possible moves - switching turn" << endl;
-                    cout << "It's the black player's turn \n" << endl;
-                    turn = X;
-                    break;
-                case E:
-                    break;
-            }
+
+            switchTurn(true);
 
         } else {
             cout << "possible moves:";
@@ -101,22 +90,10 @@ void GameFlow::play() {
                     break;
             }
 
-
             moves->flipping(x, y); //makes the move (changes discs on board).
 
-            // switch turn.
-            switch (turn) {
-                case X:
-                    turn = O;
-                    cout << "It's the white player's turn \n" << endl;
-                    break;
-                case O:
-                    turn = X;
-                    cout << "It's the black player's turn \n" << endl;
-                    break;
-                case E:
-                    break;
-            }
+            switchTurn(false);
+
 
         }
 
@@ -149,6 +126,29 @@ void GameFlow::winMassege() {
     }
 }
 
+void GameFlow::switchTurn(bool no_moves) {
+    // switch turn.
+    if(no_moves) {
+        cout << "No possible moves - switching turn" << endl;
+    }
+    switch (turn) {
+        case X:
+            turn = O;
+            cout << "It's the white player's turn \n" << endl;
+            break;
+        case O:
+            turn = X;
+            if(no_moves) {
+
+            }
+            cout << "It's the black player's turn \n" << endl;
+            break;
+        case E:
+            break;
+    }
+}
+
 GameFlow::~GameFlow() {
     delete playing_board;
 }
+

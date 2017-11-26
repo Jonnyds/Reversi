@@ -2,7 +2,9 @@
  * name: Jonathan Schwarz
  * ID: 203672910
  */
+
 #include "Board.h"
+#include <vector>
 #include <iostream>
 using namespace std;
 

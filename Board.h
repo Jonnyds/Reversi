@@ -2,9 +2,10 @@
  * name: Jonathan Schwarz
  * ID: 203672910
  */
-#include <iostream>
-#include "Disc.h"
+
 #include "Player.h"
+
+#include <iostream>
 using namespace std;
 
 #ifndef BOARD_BOARD_H

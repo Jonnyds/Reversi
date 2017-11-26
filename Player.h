@@ -3,9 +3,11 @@
  * ID: 203672910
  */
 
+
 #include <vector>
 #include "Disc.h"
 #include "PlayerType.h"
+
 using namespace std;
 
 #ifndef REVERSI_PLAYER_H
