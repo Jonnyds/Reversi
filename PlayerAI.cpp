@@ -3,3 +3,11 @@
 //
 
 #include "PlayerAI.h"
+
+PlayerAI::PlayerAI() {
+    symbol = O;
+}
+
+void PlayerAI::makeMove(BoardLogic &bl) {
+
+}

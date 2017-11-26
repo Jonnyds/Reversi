@@ -15,7 +15,6 @@ public:
      * A human player's constructor.
      * @param sym the player's symbol.
      */
-    explicit PlayerAI(DiscSymbol sym);
 
     /**
      * A default human player's constructor.
