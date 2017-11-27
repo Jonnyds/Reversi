@@ -26,7 +26,7 @@ public:
  * @param opponent the opponent of the player currently in turn.
  * @param turn who does tht turn belong to.
  */
-    BoardLogic(Board *game_board,PlayerType &player,PlayerType &opponent);
+    BoardLogic(Board *game_board,PlayerType *player,PlayerType *opponent);
 
     /**
      * Checks the coordinates of the moves the current player (in turn) can make.
@@ -98,8 +98,8 @@ public:
 
 protected:
     Board* board; // the game board's object
-    PlayerType &player_turn; // The player that the turn belongs to.
-    PlayerType &player_opponent; // the opponent.
+    PlayerType *player_turn; // The player that the turn belongs to.
+    PlayerType *player_opponent; // the opponent.
     vector<coordinates> valid_points; // the vector holding the coordinates of the valid moves the player can make.
 };
 

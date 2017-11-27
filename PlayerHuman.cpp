@@ -27,11 +27,11 @@ DiscSymbol PlayerHuman::get_symbol() {
 }
 
 coordinates PlayerHuman::makeMove(BoardLogic *bl) const {
-    bool move_found;
+    bool move_found = false;
     coordinates coor;
     int x = 0, y = 0;
     cout << "possible moves:";
-    bl.print_vec();
+    bl->print_vec();
 
 
     while (!move_found) { // This part checks of the input is valid.
@@ -40,8 +40,8 @@ coordinates PlayerHuman::makeMove(BoardLogic *bl) const {
         cin >> x;
         cin >> y;
 
-        for (int move = 0; move < bl.getValidMoves().size(); move++) {
-            if (x == bl.getValidMoves()[move].x && y ==bl.getValidMoves()[move].y) {
+        for (int move = 0; move < bl->getValidMoves().size(); move++) {
+            if (x == bl->getValidMoves()[move].x && y ==bl->getValidMoves()[move].y) {
                 move_found = true;
                 cout << "Your move is (" << x << ',' << y <<')' <<endl << endl;
             }

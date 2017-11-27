@@ -49,7 +49,7 @@ Disc **Board::get_board() {
     return board;
 }
 
-void Board::init( PlayerType &white, PlayerType &black) {
+void Board::init( PlayerType *white, PlayerType *black) {
     /**
      * Creating the first four discs.
      */
@@ -67,10 +67,10 @@ void Board::init( PlayerType &white, PlayerType &black) {
     /**
      * adding the first four discs to the player's lists.
      */
-    white.add_disc(odisc44);
-    white.add_disc(odisc55);
-    black.add_disc(xdisc45);
-    black.add_disc(xdisc54);
+    white->add_disc(odisc44);
+    white->add_disc(odisc55);
+    black->add_disc(xdisc45);
+    black->add_disc(xdisc54);
 }
 
 void Board::add_to_board(const Disc &d, const int &i, const int &j) {

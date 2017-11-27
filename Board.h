@@ -36,7 +36,7 @@ public:
     * @param white recieves the white player signed 'O'.
     * @param black recieves the black player signed 'X'.
     */
-    void init(PlayerType &white, PlayerType &black);
+    void init(PlayerType *white, PlayerType *black);
 
     /**
      * Adds a disc object to the board.

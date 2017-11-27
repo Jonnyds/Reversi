@@ -6,13 +6,13 @@
 #include "BoardLogic.h"
 
 
-BoardLogic::BoardLogic(Board *game_board,  PlayerType &player, PlayerType &opponent) :
+BoardLogic::BoardLogic(Board *game_board,  PlayerType *player, PlayerType *opponent) :
         player_turn(player), board(game_board), player_opponent(opponent){
 }
 
 vector<coordinates> BoardLogic::valid_moves() {
     int j, k, direction = 0;
-    vector<Disc> list = player_turn.get_disc_list();
+    vector<Disc> list = player_turn->get_disc_list();
     for (int i = 0; i < list.size(); ++i) { // runs on a player's disc list.
         for (direction = 0; direction < 8; ++direction) { // runs in each direction once.
             j = list[i].getloc_x();
@@ -27,10 +27,10 @@ vector<coordinates> BoardLogic::valid_moves() {
 
 void BoardLogic::add_to_board(int i, int j) {
     Disc d;
-    d = Disc(player_turn.get_symbol(),i,j);
+    d = Disc(player_turn->get_symbol(),i,j);
     board->add_to_board(d,i,j);
-    player_opponent.remove_disc(d);
-    player_turn.add_disc(d);
+    player_opponent->remove_disc(d);
+    player_turn->add_disc(d);
 }
 
 bool BoardLogic::is_board_end(int i, int j) {
@@ -43,7 +43,7 @@ bool BoardLogic::is_empty(int i, int j) {
 
 
 bool BoardLogic::is_opponent(int i, int j) {
-    return board->get_board()[i][j].get_sym() == player_opponent.get_symbol();
+    return board->get_board()[i][j].get_sym() == player_opponent->get_symbol();
 }
 
 void BoardLogic::print_vec() {
@@ -67,7 +67,7 @@ void BoardLogic::check_direction(const int &i, int &j, int &k) {
         if (is_opponent(j, k)) {
             count++;
         }
-        if(player_turn.get_symbol() == board->get_board()[j][k].get_sym()) {
+        if(player_turn->get_symbol() == board->get_board()[j][k].get_sym()) {
             another_symbol_found++;
             if (another_symbol_found == 2) {
                 break;
@@ -122,7 +122,7 @@ void BoardLogic::flipping(int j, int k) {
                 count++;
             }
 
-            if (board->get_board()[j][k].get_sym() == player_turn.get_symbol() && count > 0) {
+            if (board->get_board()[j][k].get_sym() == player_turn->get_symbol() && count > 0) {
                 for (int l = 0; l < count; ++l) { // runs back in each direction and changes the discs to the player's type discs.
                     switch (i) {
                         case 0:

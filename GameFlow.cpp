@@ -9,10 +9,18 @@
 
 using namespace std;
 
-GameFlow::GameFlow(const int &n) {
+GameFlow::GameFlow(const int &n,const int &selected) {
     playing_board = new Board(n);
-    white = new PlayerType(O);
-    black = new PlayerHuman(X);
+    switch (selected) {
+        case 1:
+            white = new PlayerHuman(O);
+            black = new PlayerHuman(X);
+        case 2:
+            white = new PlayerAI();
+            black = new PlayerHuman(X);
+
+    }
+
     turn = X;
     no_more_moves = 0;
 }
@@ -31,12 +39,12 @@ void GameFlow::play() {
     while (!isGameOver()) {
 
         playing_board->print();
-        cout << endl << "The white player has: " << white.get_disc_list().size() << " discs on board" << endl;
-        cout << "The black player has: " << black.get_disc_list().size() << " discs on board \n" << endl;
+        cout << endl << "The white player has: " << white->get_disc_list().size() << " discs on board" << endl;
+        cout << "The black player has: " << black->get_disc_list().size() << " discs on board \n" << endl;
 
         BoardLogic *moves;
 
-        if (turn == white.get_symbol()) {
+        if (turn == white->get_symbol()) {
             moves = new BoardLogic(playing_board, white, black);
         } else {
             moves = new BoardLogic(playing_board, black, white);
@@ -54,16 +62,16 @@ void GameFlow::play() {
 
             switch (turn) {
                 case X:
-                  chose = black.makeMove(moves);
+                  chose = black->makeMove(moves);
                     d = Disc(turn, chose.x, chose.y);
                     playing_board->add_to_board(d, chose.x, chose.y);
-                    black.add_disc(d);
+                    black->add_disc(d);
                     break;
                 case O:
-                   chose = white.makeMove(moves);
+                   chose = white->makeMove(moves);
                     d = Disc(turn, chose.x, chose.y);
                     playing_board->add_to_board(d, chose.x, chose.y);
-                    white.add_disc(d);
+                    white->add_disc(d);
                     break;
                 case E:
                     break;
@@ -85,7 +93,7 @@ void GameFlow::play() {
 
 bool GameFlow::isGameOver() {
 
-    int total_disc = static_cast<int>(white.get_disc_list().size() + black.get_disc_list().size());
+    int total_disc = static_cast<int>(white->get_disc_list().size() + black->get_disc_list().size());
     if (total_disc != pow(playing_board->get_size() - 1, 2) && (no_more_moves != 2)) {
         return false;
     }
@@ -93,10 +101,10 @@ bool GameFlow::isGameOver() {
 }
 
 void GameFlow::winMassege() {
-    if (white.get_disc_list().size() > black.get_disc_list().size()) {
+    if (white->get_disc_list().size() > black->get_disc_list().size()) {
         cout << "The white player is the winner";
     } else {
-        if (white.get_disc_list().size() < black.get_disc_list().size()) {
+        if (white->get_disc_list().size() < black->get_disc_list().size()) {
             cout << "The black player is the winner";
         } else {
             cout << "It's a tie";
@@ -128,5 +136,7 @@ void GameFlow::switchTurn(bool no_moves) {
 
 GameFlow::~GameFlow() {
     delete playing_board;
+    delete black;
+    delete white;
 }
 

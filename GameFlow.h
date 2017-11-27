@@ -21,7 +21,7 @@ public:
      * The gameflow object constructor.
      * @param n the board's size.
      */
-    explicit GameFlow(const int &n);
+    explicit GameFlow(const int &n, const int &selected);
 
     /**
      * Initializes the board.
