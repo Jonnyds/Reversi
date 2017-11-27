@@ -88,8 +88,8 @@ Board::~Board() {
 
 Board::Board() {}
 
-Board::Board(const Board *copy_board) {
-    size = copy_board->size;
+Board::Board(const Board &copy_board) {
+    size = copy_board.size;
     board = new Disc*[size];
     for (int i = 0; i < size; ++i) {
         board[i] = new Disc[size];
@@ -97,8 +97,8 @@ Board::Board(const Board *copy_board) {
     Disc d;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            d = Disc(copy_board->get_board()[i][j].get_sym(), copy_board->get_board()[i][j].getloc_x(),
-                     copy_board->get_board()[i][j].getloc_y());
+            d = Disc(copy_board.get_board()[i][j].get_sym(), copy_board.get_board()[i][j].getloc_x(),
+                     copy_board.get_board()[i][j].getloc_y());
             board[i][j] = d;
         }
     }

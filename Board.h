@@ -26,7 +26,7 @@ public:
      */
     explicit Board(const int &n);
 
-    Board(const Board *copy_board);
+    Board(const Board &copy_board);
 
     /**
      * Default Board object constructor.
