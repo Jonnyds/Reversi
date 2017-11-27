@@ -19,13 +19,14 @@ class PlayerType {
 public:
 
     explicit PlayerType (DiscSymbol sym);
+    PlayerType(const PlayerType &copyCons);
 
     PlayerType();
 
     void add_disc(const Disc &d);
     void remove_disc(const Disc &d);
-    vector <Disc> get_disc_list();
-    DiscSymbol get_symbol();
+    vector <Disc> get_disc_list() const;
+    DiscSymbol get_symbol() const;
     virtual coordinates makeMove(BoardLogic *bl) const = 0;
 
 protected:

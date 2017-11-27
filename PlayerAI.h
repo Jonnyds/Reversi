@@ -37,12 +37,12 @@ public:
     /**
      * @return the player's disc list.
      */
-    vector<Disc>  get_disc_list  ();
+    vector<Disc>  get_disc_list  () const;
 
     /**
      * @return The player's symbol.
      */
-    DiscSymbol get_symbol();
+    DiscSymbol get_symbol() const;
 
     virtual coordinates makeMove(BoardLogic *bl) const;
 
