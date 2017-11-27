@@ -8,6 +8,18 @@ PlayerAI::PlayerAI() {
     symbol = O;
 }
 
+PlayerAI::PlayerAI(const PlayerAI &copyAI) {
+    PlayerAI copyPlayer = PlayerAI();
+    counter = copyAI.get_disc_list().size();
+
+    Disc d;
+    for (int i = 0; i < copyAI.get_disc_list().size(); i++) {
+        Disc copyDisc = copyAI.get_disc_list()[i];
+        d = Disc(copyDisc.get_sym(), copyDisc.getloc_x(), copyDisc.getloc_y());
+        copyPlayer.add_disc(d);
+    }
+}
+
 void PlayerAI::add_disc(const Disc &d) {
     PlayerType::add_disc(d);
 }

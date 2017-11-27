@@ -22,6 +22,8 @@ public:
      */
     PlayerAI();
 
+    PlayerAI(const PlayerAI &copyAI);
+
     /**
      * Adds a disc to a player's list.
      * @param d the disc we want to add to the player's list.
