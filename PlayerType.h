@@ -19,7 +19,6 @@ class PlayerType {
 public:
 
     explicit PlayerType (DiscSymbol sym);
-    PlayerType(const PlayerType &copyCons);
 
     PlayerType();
 
