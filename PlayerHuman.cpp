@@ -18,11 +18,11 @@ void PlayerHuman::remove_disc(const Disc &d) {
     PlayerType::remove_disc(d);
 }
 
-vector<Disc> PlayerHuman::get_disc_list() {
+vector<Disc> PlayerHuman::get_disc_list() const {
     return PlayerType::get_disc_list();
 }
 
-DiscSymbol PlayerHuman::get_symbol() {
+DiscSymbol PlayerHuman::get_symbol() const {
     return PlayerType::get_symbol();
 }
 
