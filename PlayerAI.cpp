@@ -3,6 +3,7 @@
 //
 
 #include "PlayerAI.h"
+#include "PlayerHuman.h"
 
 PlayerAI::PlayerAI() {
     symbol = O;
@@ -38,11 +39,15 @@ DiscSymbol PlayerAI::get_symbol() const {
 
 coordinates PlayerAI::makeMove(BoardLogic *bl) const {
 
-    vector<coordinates> possible_moves;
 
-    possible_moves = bl->getValidMoves();
 
-    for (int i = 0; i < possible_moves.size() ; ++i) {
+// a for AI, h for human
+    for (int a = 0; a < possible_moves.size() ; ++a) {
+
+        for (int h = 0; h <  ; ++h) {
+
+
+        }
 
 
     }

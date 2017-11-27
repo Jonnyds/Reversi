@@ -4,10 +4,19 @@
  */
 
 #include "BoardLogic.h"
+#include "PlayerHuman.h"
+#include "PlayerAI.h"
 
 
 BoardLogic::BoardLogic(Board *game_board,  PlayerType *player, PlayerType *opponent) :
         player_turn(player), board(game_board), player_opponent(opponent){
+}
+
+BoardLogic::BoardLogic(BoardLogic &copybl) {
+    valid_points = copybl.getValidMoves();
+    player_turn = static_cast<PlayerAI *> (copybl.getPlayerTurn());
+    player_opponent = static_cast<PlayerHuman *> (copybl.getPlayerTurn());
+    Board *virtualBoard = copybl.getBoard();
 }
 
 vector<coordinates> BoardLogic::valid_moves() {
@@ -215,3 +224,17 @@ void BoardLogic::check_double() {
 vector<coordinates> BoardLogic::getValidMoves() {
     return valid_points;
 }
+
+PlayerType *BoardLogic::getPlayerTurn() {
+    return player_turn;
+}
+
+PlayerType *BoardLogic::getPlayerOpponent() {
+    return player_opponent;
+}
+
+Board *BoardLogic::getBoard() {
+    return board;
+}
+
+

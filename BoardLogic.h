@@ -28,6 +28,8 @@ public:
  */
     BoardLogic(Board *game_board,PlayerType *player,PlayerType *opponent);
 
+    BoardLogic(BoardLogic &copybl);
+
     /**
      * Checks the coordinates of the moves the current player (in turn) can make.
      * @return a vector of coordinates with all the valid moves the player can make.
@@ -94,7 +96,14 @@ public:
      */
     void check_double();
 
+
+
     vector<coordinates> getValidMoves();
+
+    PlayerType* getPlayerTurn();
+    PlayerType* getPlayerOpponent();
+    Board* getBoard();
+
 
 
 protected:
