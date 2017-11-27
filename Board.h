@@ -26,6 +26,8 @@ public:
      */
     explicit Board(const int &n);
 
+    Board(const Board *copy_board);
+
     /**
      * Default Board object constructor.
      */
@@ -49,12 +51,12 @@ public:
     /**
      * @return the size of the matrix.
      */
-    int get_size();
+    int get_size() const;
 
     /**
      * @return returns the game board.
      */
-    Disc** get_board();
+    Disc** get_board() const;
 
     /**
      * Prints the game board.
