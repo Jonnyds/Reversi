@@ -4,6 +4,7 @@
  */
 #include <vector>
 #include "GameFlow.h"
+#include "Menu.h"
 
 
 using namespace std;
@@ -13,7 +14,8 @@ const int n = 8; // n - board's size.
  * @return 0;
  */
 int main() {
-    GameFlow g(n);
+    Menu m = Menu();
+    GameFlow g(n, m.choosePlayer());
     g.init_game();
     g.play();
     return 0;
