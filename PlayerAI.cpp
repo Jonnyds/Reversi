@@ -24,4 +24,15 @@ DiscSymbol PlayerAI::get_symbol() {
     return PlayerType::get_symbol();
 }
 
-coordinates PlayerAI::makeMove(BoardLogic *bl) const {}
+coordinates PlayerAI::makeMove(BoardLogic *bl) const {
+
+    vector<coordinates> possible_moves;
+
+    possible_moves = bl->getValidMoves();
+
+    for (int i = 0; i < possible_moves.size() ; ++i) {
+
+
+    }
+
+}

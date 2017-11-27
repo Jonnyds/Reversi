@@ -2,6 +2,7 @@
 // Created by sahar on 11/26/17.
 //
 #include "PlayerType.h"
+#include "BoardLogic.h"
 #ifndef EX2_PLAYERAI_H
 #define EX2_PLAYERAI_H
 

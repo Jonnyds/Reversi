@@ -93,6 +93,7 @@ public:
      * Checks and deletes double appearance of coordinates of valid moves vector.
      */
     void check_double();
+
     vector<coordinates> getValidMoves();
 
 

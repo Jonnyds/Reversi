@@ -12,12 +12,14 @@ using namespace std;
 GameFlow::GameFlow(const int &n,const int &selected) {
     playing_board = new Board(n);
     switch (selected) {
-        case 1:
+        case 2:
             white = new PlayerHuman(O);
             black = new PlayerHuman(X);
-        case 2:
+            break;
+        case 1:
             white = new PlayerAI();
             black = new PlayerHuman(X);
+            break;
 
     }
 
