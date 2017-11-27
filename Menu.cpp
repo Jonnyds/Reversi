@@ -23,7 +23,7 @@ int Menu::choosePlayer() {
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-                cout << "Your input is not valid, please select again" << endl;
+                cout << "Your input is not valid, please select again." << endl;
         }
     }
     return chose;
