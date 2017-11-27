@@ -8,6 +8,20 @@ PlayerAI::PlayerAI() {
     symbol = O;
 }
 
-void PlayerAI::makeMove(BoardLogic &bl) {
-
+void PlayerAI::add_disc(const Disc &d) {
+    PlayerType::add_disc(d);
 }
+
+void PlayerAI::remove_disc(const Disc &d) {
+    PlayerType::remove_disc(d);
+}
+
+vector<Disc> PlayerAI::get_disc_list() {
+    return PlayerType::get_disc_list();
+}
+
+DiscSymbol PlayerAI::get_symbol() {
+    return PlayerType::get_symbol();
+}
+
+coordinates PlayerAI::makeMove(BoardLogic *bl) const {}

@@ -5,6 +5,7 @@
 #include <vector>
 #include "GameFlow.h"
 
+
 using namespace std;
 
 const int n = 8; // n - board's size.

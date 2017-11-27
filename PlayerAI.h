@@ -1,12 +1,12 @@
 //
 // Created by sahar on 11/26/17.
 //
-
+#include "PlayerType.h"
 #ifndef EX2_PLAYERAI_H
 #define EX2_PLAYERAI_H
 
 
-#include "PlayerType.h"
+
 
 class PlayerAI: public PlayerType {
 public:
@@ -43,7 +43,7 @@ public:
      */
     DiscSymbol get_symbol();
 
-    void makeMove(BoardLogic &bl);
+    virtual coordinates makeMove(BoardLogic *bl) const;
 
 };
 

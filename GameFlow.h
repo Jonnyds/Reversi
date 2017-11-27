@@ -5,6 +5,9 @@
 
 
 #include "BoardLogic.h"
+#include "PlayerType.h"
+#include "PlayerHuman.h"
+#include "PlayerAI.h"
 #ifndef REVERSI_GAMEFLOW_H
 #define REVERSI_GAMEFLOW_H
 /**
@@ -43,8 +46,8 @@ public:
 
 private:
     Board* playing_board; // The game's board object.
-    PlayerHuman black; // The black player (with symbol X).
-    PlayerHuman white; // The white player (with symbol O).
+    PlayerType* black; // The black player (with symbol X).
+    PlayerType* white; // The white player (with symbol O).
     DiscSymbol turn; // Which player does the turn belong to.
     int no_more_moves;
 

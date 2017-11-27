@@ -26,7 +26,7 @@ public:
  * @param opponent the opponent of the player currently in turn.
  * @param turn who does tht turn belong to.
  */
-    BoardLogic(Board *game_board,PlayerHuman &player,PlayerHuman &opponent);
+    BoardLogic(Board *game_board,PlayerType &player,PlayerType &opponent);
 
     /**
      * Checks the coordinates of the moves the current player (in turn) can make.
@@ -93,14 +93,14 @@ public:
      * Checks and deletes double appearance of coordinates of valid moves vector.
      */
     void check_double();
+    vector<coordinates> getValidMoves();
 
 
-
-private:
+protected:
     Board* board; // the game board's object
-    PlayerHuman &player_turn; // The player that the turn belongs to.
-    PlayerHuman &player_opponent; // the opponent.
-    vector<coordinates> velid_points; // the vector holding the coordinates of the valid moves the player can make.
+    PlayerType &player_turn; // The player that the turn belongs to.
+    PlayerType &player_opponent; // the opponent.
+    vector<coordinates> valid_points; // the vector holding the coordinates of the valid moves the player can make.
 };
 
 

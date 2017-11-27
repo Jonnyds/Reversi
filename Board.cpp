@@ -49,7 +49,7 @@ Disc **Board::get_board() {
     return board;
 }
 
-void Board::init( PlayerHuman &white, PlayerHuman &black) {
+void Board::init( PlayerType &white, PlayerType &black) {
     /**
      * Creating the first four discs.
      */

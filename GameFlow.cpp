@@ -5,14 +5,14 @@
 
 #include "GameFlow.h"
 #include <cmath>
-#include <limits>
+
 
 using namespace std;
 
 GameFlow::GameFlow(const int &n) {
     playing_board = new Board(n);
-    white = PlayerHuman(O);
-    black = PlayerHuman(X);
+    white = new PlayerType(O);
+    black = new PlayerHuman(X);
     turn = X;
     no_more_moves = 0;
 }
@@ -23,13 +23,12 @@ void GameFlow::init_game() {
 
 void GameFlow::play() {
     int i;
-    int x = 0, y = 0;
-    bool move_found;
+    Disc d;
+    coordinates chose;
 
     vector<coordinates> possible_moves;
 
     while (!isGameOver()) {
-        move_found = false;
 
         playing_board->print();
         cout << endl << "The white player has: " << white.get_disc_list().size() << " discs on board" << endl;
@@ -48,52 +47,31 @@ void GameFlow::play() {
         if (possible_moves.empty()) { // check if both players have no more moves then the game ends.
 
             no_more_moves++;
-
             switchTurn(true);
 
         } else {
-            cout << "possible moves:";
-            moves->print_vec();
             no_more_moves = 0;
-
-            while (!move_found) { // This part checks of the input is valid.
-
-                cout << "please enter the coordinates of the move you would like to make:";
-                cin >> x;
-                cin >> y;
-
-                for (int move = 0; move < possible_moves.size(); move++) {
-                    if (x == possible_moves[move].x && y == possible_moves[move].y) {
-                        move_found = true;
-                        cout << "Your move is (" << x << ',' << y <<')' <<endl << endl;
-                    }
-                }
-                if(!move_found) {
-                    cin.clear();
-                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    cout << "Please enter numbers only! \n";
-                }
-            }
-
-            // adds the chosen location disc to board
-            Disc d(turn, x, y);
-            playing_board->add_to_board(d, x, y);
 
             switch (turn) {
                 case X:
+                  chose = black.makeMove(moves);
+                    d = Disc(turn, chose.x, chose.y);
+                    playing_board->add_to_board(d, chose.x, chose.y);
                     black.add_disc(d);
                     break;
                 case O:
+                   chose = white.makeMove(moves);
+                    d = Disc(turn, chose.x, chose.y);
+                    playing_board->add_to_board(d, chose.x, chose.y);
                     white.add_disc(d);
                     break;
                 case E:
                     break;
             }
 
-            moves->flipping(x, y); //makes the move (changes discs on board).
+            moves->flipping(chose.x, chose.y); //makes the move (changes discs on board).
 
             switchTurn(false);
-
 
         }
 

@@ -18,16 +18,15 @@ class PlayerType {
 
 public:
 
-    explicit PlayerType (DiscSymbol sym): counter(0), symbol(sym){
-    }
+    explicit PlayerType (DiscSymbol sym);
 
-    PlayerType() {};
+    PlayerType();
 
     void add_disc(const Disc &d);
     void remove_disc(const Disc &d);
     vector <Disc> get_disc_list();
     DiscSymbol get_symbol();
-    virtual void makeMove(BoardLogic &bl) = 0;
+    virtual coordinates makeMove(BoardLogic *bl) const = 0;
 
 protected:
     DiscSymbol symbol; //The player's symbol.

@@ -53,7 +53,7 @@ public:
      */
     DiscSymbol get_symbol();
 
-    void makeMove(BoardLogic &bl);
+    virtual coordinates makeMove(BoardLogic *bl) const;
 
 };
 
