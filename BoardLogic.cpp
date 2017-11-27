@@ -12,11 +12,11 @@ BoardLogic::BoardLogic(Board *game_board,  PlayerType *player, PlayerType *oppon
         player_turn(player), board(game_board), player_opponent(opponent){
 }
 
-BoardLogic::BoardLogic(BoardLogic &copybl) {
-    valid_points = copybl.getValidMoves();
-    player_turn = static_cast<PlayerAI *> (copybl.getPlayerTurn());
-    player_opponent = static_cast<PlayerHuman *> (copybl.getPlayerTurn());
-    Board *virtualBoard = copybl.getBoard();
+BoardLogic::BoardLogic(BoardLogic *copybl) {
+    valid_points = copybl->getValidMoves();
+    player_turn = static_cast<PlayerAI *> (copybl->getPlayerTurn());
+    player_opponent = static_cast<PlayerHuman *> (copybl->getPlayerTurn());
+    Board *virtualBoard = copybl->getBoard();
 }
 
 vector<coordinates> BoardLogic::valid_moves() {

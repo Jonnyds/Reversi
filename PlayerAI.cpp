@@ -39,17 +39,59 @@ DiscSymbol PlayerAI::get_symbol() const {
 
 coordinates PlayerAI::makeMove(BoardLogic *bl) const {
 
-
+    int maxConsoleFlipping = 0;
+    int minFlipping = 0;
+    Disc dForAI;
+    Disc dForH;
+    coordinates choseAI;
+    coordinates choseH;
+    coordinates bestChose;
+    BoardLogic virtualBoardLog = BoardLogic(*bl);
 
 // a for AI, h for human
-    for (int a = 0; a < possible_moves.size() ; ++a) {
+    for (int a = 0; a < virtualBoardLog.getValidMoves().size() ; ++a) {
 
-        for (int h = 0; h <  ; ++h) {
+        BoardLogic bl1 = virtualBoardLog;
+        choseAI.x = bl1.getValidMoves()[a].x;
+        choseAI.y = bl1.getValidMoves()[a].y;
 
+        dForAI = Disc(bl1.getPlayerTurn()->get_symbol(), choseAI.x, choseAI.y);
+        bl1.getBoard()->add_to_board(dForAI, choseAI.x, choseAI.y);
+        bl1.getPlayerTurn()->add_disc(dForAI);
+        bl1.flipping(choseAI.x, choseAI.y);
+
+        BoardLogic bl2 = BoardLogic(bl1.getBoard(),bl1.getPlayerOpponent(),bl1.getPlayerTurn());
+
+        for (int h = 0; h < bl2.getValidMoves().size() ; ++h) {
+
+            int numFlipping = 0;
+            int numOfH = 0;
+            int numOfAI = 0;
+
+            choseH.x = bl2.getValidMoves()[a].x;
+            choseH.y = bl2.getValidMoves()[a].y;
+            dForH = Disc(bl1.getPlayerTurn()->get_symbol(), choseH.x, choseH.y);
+            bl2.getBoard()->add_to_board(dForH, choseH.x, choseH.y);
+            bl2.getPlayerTurn()->add_disc(dForH);
+            bl2.flipping(choseH.x, choseH.y);
+
+            numOfH = bl2.getPlayerTurn()->get_disc_list().size();
+            numOfAI = bl2.getPlayerOpponent()->get_disc_list().size();
+            numFlipping = numOfH - numOfAI;
+
+            if (numFlipping >= maxConsoleFlipping) {
+                maxConsoleFlipping = numFlipping;
+            }
 
         }
 
+        if (maxConsoleFlipping <= minFlipping) {
+            minFlipping = maxConsoleFlipping;
+            bestChose.x = choseAI.x;
+            bestChose.y = choseAI.y;
+        }
 
     }
+    return bestChose;
 
 }
