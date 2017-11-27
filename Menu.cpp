@@ -18,13 +18,12 @@ int Menu::choosePlayer() {
         cin >> chose;
         if ((chose == ai) || (chose == console)) {
             validInput = true;
+            cout << "Here we go!!!!" << endl << endl;
         } else {
             cin.clear();
-            if (cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n')) {
-                cout << "Please enter numbers only! \n";
-            } else {
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
                 cout << "Your input is not valid, please select again" << endl;
-            }
         }
     }
     return chose;
