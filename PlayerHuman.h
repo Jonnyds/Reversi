@@ -26,12 +26,12 @@ public:
      */
     explicit PlayerHuman(DiscSymbol sym);
 
+    virtual PlayerHuman* clone() const;
     /**
      * A default human player's constructor.
      */
     PlayerHuman();
 
-    PlayerHuman(const PlayerHuman &copyHuman);
 
     /**
      * Adds a disc to a player's list.

@@ -22,7 +22,7 @@ public:
      */
     PlayerAI();
 
-    PlayerAI(const PlayerAI &copyAI);
+    virtual PlayerAI* clone() const;
 
     /**
      * Adds a disc to a player's list.

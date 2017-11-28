@@ -9,8 +9,8 @@
 using namespace std;
 
 PlayerHuman::PlayerHuman(DiscSymbol sym): PlayerType(sym){}
-
-PlayerHuman::PlayerHuman(const PlayerHuman &copyHuman) {
+/*
+PlayerHuman::PlayerHuman(PlayerHuman &copyHuman) {
     PlayerHuman copyPlayer = PlayerHuman(copyHuman.get_symbol());
     counter = copyHuman.get_disc_list().size();
 
@@ -22,7 +22,7 @@ PlayerHuman::PlayerHuman(const PlayerHuman &copyHuman) {
     }
 
 }
-
+*/
 void PlayerHuman::add_disc(const Disc &d) {
     PlayerType::add_disc(d);
 }
@@ -76,3 +76,9 @@ coordinates PlayerHuman::makeMove(BoardLogic *bl) const {
 
 
 }
+
+PlayerHuman* PlayerHuman::clone() const {
+    return new PlayerHuman(*this);
+}
+
+

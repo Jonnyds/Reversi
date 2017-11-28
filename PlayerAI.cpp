@@ -8,8 +8,8 @@
 PlayerAI::PlayerAI() {
     symbol = O;
 }
-
-PlayerAI::PlayerAI(const PlayerAI &copyAI) {
+/*
+PlayerAI::PlayerAI(PlayerAI &copyAI) {
     PlayerAI copyPlayer = PlayerAI();
     counter = copyAI.get_disc_list().size();
 
@@ -20,7 +20,7 @@ PlayerAI::PlayerAI(const PlayerAI &copyAI) {
         copyPlayer.add_disc(d);
     }
 }
-
+*/
 void PlayerAI::add_disc(const Disc &d) {
     PlayerType::add_disc(d);
 }
@@ -46,21 +46,31 @@ coordinates PlayerAI::makeMove(BoardLogic *bl) const {
     coordinates choseAI;
     coordinates choseH;
     coordinates bestChose;
-    BoardLogic virtualBoardLog = BoardLogic(*bl);
+    BoardLogic* virtualBoardLog = bl->clone();
+    /*
+    Board* b1 = bl->getBoard()->clone();
+    PlayerType* playerhuman1 = bl->getPlayerTurn()->clone();
+    PlayerType* playerAI1 = bl->getPlayerOpponent()->clone();
+    BoardLogic* virtualBoardLog = new BoardLogic(b1,playerAI1,playerhuman1);
+*/
+
+
+
 
 // a for AI, h for human
-    for (int a = 0; a < virtualBoardLog.getValidMoves().size() ; ++a) {
 
-        BoardLogic bl1 = virtualBoardLog;
-        choseAI.x = bl1.getValidMoves()[a].x;
-        choseAI.y = bl1.getValidMoves()[a].y;
+    for (int a = 0; a < virtualBoardLog->getValidMoves().size() ; ++a) {
 
-        dForAI = Disc(bl1.getPlayerTurn()->get_symbol(), choseAI.x, choseAI.y);
-        bl1.getBoard()->add_to_board(dForAI, choseAI.x, choseAI.y);
-        bl1.getPlayerTurn()->add_disc(dForAI);
-        bl1.flipping(choseAI.x, choseAI.y);
+        BoardLogic* bl1 = virtualBoardLog;
+        choseAI.x = bl1->getValidMoves()[a].x;
+        choseAI.y = bl1->getValidMoves()[a].y;
 
-        BoardLogic bl2 = BoardLogic(bl1.getBoard(),bl1.getPlayerOpponent(),bl1.getPlayerTurn());
+        dForAI = Disc(bl1->getPlayerTurn()->get_symbol(), choseAI.x, choseAI.y);
+        bl1->getBoard()->add_to_board(dForAI, choseAI.x, choseAI.y);
+        bl1->getPlayerTurn()->add_disc(dForAI);
+        bl1->flipping(choseAI.x, choseAI.y);
+
+        BoardLogic bl2 = BoardLogic(bl1->getBoard(),bl1->getPlayerOpponent(),bl1->getPlayerTurn());
 
         for (int h = 0; h < bl2.getValidMoves().size() ; ++h) {
 
@@ -70,7 +80,7 @@ coordinates PlayerAI::makeMove(BoardLogic *bl) const {
 
             choseH.x = bl2.getValidMoves()[a].x;
             choseH.y = bl2.getValidMoves()[a].y;
-            dForH = Disc(bl1.getPlayerTurn()->get_symbol(), choseH.x, choseH.y);
+            dForH = Disc(bl1->getPlayerTurn()->get_symbol(), choseH.x, choseH.y);
             bl2.getBoard()->add_to_board(dForH, choseH.x, choseH.y);
             bl2.getPlayerTurn()->add_disc(dForH);
             bl2.flipping(choseH.x, choseH.y);
@@ -95,3 +105,8 @@ coordinates PlayerAI::makeMove(BoardLogic *bl) const {
     return bestChose;
 
 }
+
+PlayerAI *PlayerAI::clone() const {
+    return new PlayerAI(*this);
+}
+

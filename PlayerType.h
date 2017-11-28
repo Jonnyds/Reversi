@@ -27,6 +27,7 @@ public:
     vector <Disc> get_disc_list() const;
     DiscSymbol get_symbol() const;
     virtual coordinates makeMove(BoardLogic *bl) const = 0;
+    virtual PlayerType* clone() const = 0;
 
 protected:
     DiscSymbol symbol; //The player's symbol.

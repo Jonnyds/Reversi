@@ -19,6 +19,12 @@ Board::Board(const int &n) : size(n+1){
         }
     }
 }
+
+Board *Board::clone() {
+    return new Board(*this);
+}
+
+
 void Board::print() {
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
@@ -88,21 +94,9 @@ Board::~Board() {
 
 Board::Board() {}
 
-Board::Board(const Board &copy_board) {
-    size = copy_board.size;
-    board = new Disc*[size];
-    for (int i = 0; i < size; ++i) {
-        board[i] = new Disc[size];
-        }
-    Disc d;
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            d = Disc(copy_board.get_board()[i][j].get_sym(), copy_board.get_board()[i][j].getloc_x(),
-                     copy_board.get_board()[i][j].getloc_y());
-            board[i][j] = d;
-        }
-    }
-}
+
+
+
 // Empty constructor to create an empty object of that type (not initialized).
 
 
