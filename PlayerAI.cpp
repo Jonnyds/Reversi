@@ -46,20 +46,19 @@ coordinates PlayerAI::makeMove(BoardLogic *bl) const {
     coordinates choseAI;
     coordinates choseH;
     coordinates bestChose;
-    BoardLogic* virtualBoardLog = bl->clone();
-    /*
-    Board* b1 = bl->getBoard()->clone();
-    PlayerType* playerhuman1 = bl->getPlayerTurn()->clone();
-    PlayerType* playerAI1 = bl->getPlayerOpponent()->clone();
+    //BoardLogic* virtualBoardLog = bl->clone();
+
+    Board* b1 = new Board(bl->getBoard()->get_size() - 1);
+    b1->copy_board(bl->getBoard());
+    PlayerType* playerhuman1 = bl->getPlayerOpponent()->clone();
+    PlayerType* playerAI1 = bl->getPlayerTurn()->clone();
     BoardLogic* virtualBoardLog = new BoardLogic(b1,playerAI1,playerhuman1);
-*/
-
-
+    
 
 
 // a for AI, h for human
 
-    for (int a = 0; a < virtualBoardLog->getValidMoves().size() ; ++a) {
+    for (int a = 0; a < bl->getValidMoves().size() ; ++a) {
 
         BoardLogic* bl1 = virtualBoardLog;
         choseAI.x = bl1->getValidMoves()[a].x;

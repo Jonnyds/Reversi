@@ -20,10 +20,9 @@ Board::Board(const int &n) : size(n+1){
     }
 }
 
-Board *Board::clone() {
+Board*Board::clone() {
     return new Board(*this);
 }
-
 
 void Board::print() {
     for (int i = 0; i < size; ++i) {
@@ -94,6 +93,18 @@ Board::~Board() {
 
 Board::Board() {}
 
+void Board::copy_board(Board *copyboard) {
+Disc d;
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+           // d = Disc(copyboard->get_board()[i][j].get_sym(),
+             //        copyboard->get_board()[i][j].getloc_x(),
+              //       copyboard->get_board()[i][j].getloc_y());
+            board[i][j] = copyboard->get_board()[i][j];
+        }
+    }
+
+}
 
 
 

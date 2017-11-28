@@ -63,6 +63,8 @@ public:
      */
     void print();
 
+    void copy_board(Board* copyboard);
+
     /**
      * Board object destructor, releasing the dynamically allocated space of the Disc** member.
      */
