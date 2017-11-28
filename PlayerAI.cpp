@@ -46,21 +46,17 @@ coordinates PlayerAI::makeMove(BoardLogic *bl) const {
     coordinates choseAI;
     coordinates choseH;
     coordinates bestChose;
-    //BoardLogic* virtualBoardLog = bl->clone();
+    BoardLogic* virtualBoardLog = createDeepCopyOfLogic(bl);
 
-    Board* b1 = new Board(bl->getBoard()->get_size() - 1);
-    b1->copy_board(bl->getBoard());
-    PlayerType* playerhuman1 = bl->getPlayerOpponent()->clone();
-    PlayerType* playerAI1 = bl->getPlayerTurn()->clone();
-    BoardLogic* virtualBoardLog = new BoardLogic(b1,playerAI1,playerhuman1);
-    
+
 
 
 // a for AI, h for human
 
     for (int a = 0; a < bl->getValidMoves().size() ; ++a) {
 
-        BoardLogic* bl1 = virtualBoardLog;
+        BoardLogic* bl1 = createDeepCopyOfLogic(virtualBoardLog);
+        bl1->valid_moves();
         choseAI.x = bl1->getValidMoves()[a].x;
         choseAI.y = bl1->getValidMoves()[a].y;
 
@@ -69,43 +65,65 @@ coordinates PlayerAI::makeMove(BoardLogic *bl) const {
         bl1->getPlayerTurn()->add_disc(dForAI);
         bl1->flipping(choseAI.x, choseAI.y);
 
-        BoardLogic bl2 = BoardLogic(bl1->getBoard(),bl1->getPlayerOpponent(),bl1->getPlayerTurn());
+        BoardLogic *bl2 = new BoardLogic(bl1->getBoard(),bl1->getPlayerOpponent(),bl1->getPlayerTurn());
+        bl2->valid_moves();
 
-        for (int h = 0; h < bl2.getValidMoves().size() ; ++h) {
+
+        for (int h = 0; h < bl2->getValidMoves().size() ; ++h) {
+
+            BoardLogic* bl3 = createDeepCopyOfLogic(bl2);
+            bl3->valid_moves();
 
             int numFlipping = 0;
             int numOfH = 0;
             int numOfAI = 0;
 
-            choseH.x = bl2.getValidMoves()[a].x;
-            choseH.y = bl2.getValidMoves()[a].y;
-            dForH = Disc(bl1->getPlayerTurn()->get_symbol(), choseH.x, choseH.y);
-            bl2.getBoard()->add_to_board(dForH, choseH.x, choseH.y);
-            bl2.getPlayerTurn()->add_disc(dForH);
-            bl2.flipping(choseH.x, choseH.y);
+            choseH.x = bl3->getValidMoves()[h].x;
+            choseH.y = bl3->getValidMoves()[h].y;
+            dForH = Disc(bl3->getPlayerTurn()->get_symbol(), choseH.x, choseH.y);
+            bl3->getBoard()->add_to_board(dForH, choseH.x, choseH.y);
+            bl3->getPlayerTurn()->add_disc(dForH);
+            bl3->flipping(choseH.x, choseH.y);
 
-            numOfH = bl2.getPlayerTurn()->get_disc_list().size();
-            numOfAI = bl2.getPlayerOpponent()->get_disc_list().size();
+            numOfH = bl3->getPlayerTurn()->get_disc_list().size();
+            numOfAI = bl3->getPlayerOpponent()->get_disc_list().size();
             numFlipping = numOfH - numOfAI;
 
             if (numFlipping >= maxConsoleFlipping) {
                 maxConsoleFlipping = numFlipping;
             }
 
+            delete bl3;
         }
-
+        if (minFlipping == 0){
+            minFlipping = maxConsoleFlipping;
+        }
         if (maxConsoleFlipping <= minFlipping) {
             minFlipping = maxConsoleFlipping;
             bestChose.x = choseAI.x;
             bestChose.y = choseAI.y;
         }
-
+        delete bl2;
+        delete bl1;
     }
+cout << "O played (" << bestChose.x << "," << bestChose.y << ")" << endl;
     return bestChose;
 
 }
 
 PlayerAI *PlayerAI::clone() const {
     return new PlayerAI(*this);
+}
+
+BoardLogic *PlayerAI::createDeepCopyOfLogic(BoardLogic *copybl) const{
+
+    Board* copyboard = new Board(copybl->getBoard()->get_size() - 1);
+    copyboard->copy_board(copybl->getBoard());
+    PlayerType* copyplayerhuman = copybl->getPlayerOpponent()->clone();
+    copyplayerhuman->copyVector(copybl->getPlayerOpponent()->get_disc_list());
+    PlayerType* copyplayerAI = copybl->getPlayerTurn()->clone();
+    copyplayerAI->copyVector(copybl->getPlayerTurn()->get_disc_list());
+    BoardLogic* virtualBoardLog = new BoardLogic(copyboard,copyplayerAI,copyplayerhuman);
+   return virtualBoardLog;
 }
 

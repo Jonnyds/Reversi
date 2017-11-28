@@ -114,12 +114,10 @@ void BoardLogic::flipping(int j, int k) {
     int count = 0;
     int jsave = j;
     int ksave = k;
-
     for (int i = 0; i < 8; ++i) { // for each direction.
         count = 0;
         j = jsave;
         k = ksave;
-
         while (!is_board_end(j, k)) {
 
             if (is_empty(j, k) && count == 0) {

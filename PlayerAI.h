@@ -46,6 +46,8 @@ public:
      */
     DiscSymbol get_symbol() const;
 
+    BoardLogic* createDeepCopyOfLogic(BoardLogic* copybl) const;
+
     virtual coordinates makeMove(BoardLogic *bl) const;
 
 };
