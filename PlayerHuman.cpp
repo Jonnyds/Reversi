@@ -49,7 +49,7 @@ coordinates PlayerHuman::makeMove(BoardLogic *bl) const {
 
     while (!move_found) { // This part checks of the input is valid.
 
-        cout << "please enter the coordinates of the move you would like to make:";
+        cout << "please enter the coordinates of the move you would like to do:";
         cin >> x;
         cin >> y;
 
