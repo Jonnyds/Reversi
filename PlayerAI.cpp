@@ -103,7 +103,9 @@ coordinates PlayerAI::makeMove(BoardLogic *bl) const {
             bestChose.x = choseAI.x;
             bestChose.y = choseAI.y;
         }
+
         delete bl2;
+
         delete bl1;
     }
 cout << "O played (" << bestChose.x << "," << bestChose.y << ")" << endl;
@@ -119,11 +121,15 @@ BoardLogic *PlayerAI::createDeepCopyOfLogic(BoardLogic *copybl) const{
 
     Board* copyboard = new Board(copybl->getBoard()->get_size() - 1);
     copyboard->copy_board(copybl->getBoard());
+
     PlayerType* copyplayerhuman = copybl->getPlayerOpponent()->clone();
     copyplayerhuman->copyVector(copybl->getPlayerOpponent()->get_disc_list());
+
     PlayerType* copyplayerAI = copybl->getPlayerTurn()->clone();
     copyplayerAI->copyVector(copybl->getPlayerTurn()->get_disc_list());
+
     BoardLogic* virtualBoardLog = new BoardLogic(copyboard,copyplayerAI,copyplayerhuman);
    return virtualBoardLog;
 }
+
 

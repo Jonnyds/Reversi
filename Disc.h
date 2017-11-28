@@ -66,6 +66,9 @@ public:
      */
     bool    check_coordinates(const Disc &d);
 
+    bool operator ==(const Disc &d) const {
+        return ((getloc_x() == d.getloc_x() && (getloc_y() == d.getloc_y())));
+    }
 private:
     DiscSymbol   symbol; // The disc's symbol.
     coordinates  coordinates_on_board; // The disc's coordinates.

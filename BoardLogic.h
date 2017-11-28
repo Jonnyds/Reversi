@@ -28,6 +28,7 @@ public:
  */
     BoardLogic(Board *game_board,PlayerType *player,PlayerType *opponent);
 
+    BoardLogic() {};
     BoardLogic* clone();
 
     /**
@@ -104,6 +105,8 @@ public:
     PlayerType* getPlayerOpponent();
     Board* getBoard();
 
+    virtual ~BoardLogic();
+    void swapPlayers();
 
 
 protected:

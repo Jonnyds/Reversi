@@ -234,5 +234,16 @@ Board *BoardLogic::getBoard() {
     return board;
 }
 
+void BoardLogic::swapPlayers() {
+    PlayerType* temp = player_turn;
+    player_turn = player_opponent;
+    player_opponent = temp;
+}
 
+BoardLogic::~BoardLogic() {
+    /*
+    delete player_turn;
+    delete player_opponent;
+     */
+}
 

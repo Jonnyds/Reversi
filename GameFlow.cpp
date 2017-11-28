@@ -35,21 +35,19 @@ void GameFlow::play() {
     int i;
     Disc d;
     coordinates chose;
-
+    BoardLogic moves = BoardLogic(playing_board, black, white);
     vector<coordinates> possible_moves;
-
     while (!isGameOver()) {
 
         playing_board->print();
         cout << endl << "The white player has: " << white->get_disc_list().size() << " discs on board" << endl;
         cout << "The black player has: " << black->get_disc_list().size() << " discs on board \n" << endl;
 
-        BoardLogic *moves;
-
+         BoardLogic* moves;
         if (turn == white->get_symbol()) {
-            moves = new BoardLogic(playing_board, white, black);
+            moves = new BoardLogic(playing_board,white,black);
         } else {
-            moves = new BoardLogic(playing_board, black, white);
+            moves = new BoardLogic(playing_board,black,white);
         }
 
         possible_moves = moves->valid_moves(); // checks the valid moves.
@@ -82,10 +80,8 @@ void GameFlow::play() {
             moves->flipping(chose.x, chose.y); //makes the move (changes discs on board).
 
             switchTurn(false);
-
+            delete moves;
         }
-
-        delete moves;
 
     }
 
@@ -137,8 +133,8 @@ void GameFlow::switchTurn(bool no_moves) {
 }
 
 GameFlow::~GameFlow() {
-    delete playing_board;
-    delete black;
     delete white;
+    delete black;
+    delete playing_board;
 }
 
