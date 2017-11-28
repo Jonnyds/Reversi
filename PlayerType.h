@@ -26,6 +26,7 @@ public:
     void remove_disc(const Disc &d);
     vector <Disc> get_disc_list() const;
     DiscSymbol get_symbol() const;
+    void copyVector(vector<Disc>* copyVec) const;
     virtual coordinates makeMove(BoardLogic *bl) const = 0;
     virtual PlayerType* clone() const = 0;
 

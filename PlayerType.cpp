@@ -35,6 +35,13 @@ PlayerType::PlayerType() {
 
 }
 
+void PlayerType::copyVector(vector<Disc> *copyVec) const {
+
+    for (int i = 0; i < copyVec->size() ; ++i) {
+        dlist[i] = copyVec->[i];
+    }
+}
+
 //virtual void PlayerType::makeMove(BoardLogic &bl) const;
 
 
