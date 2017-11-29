@@ -1,7 +1,10 @@
 /*
- * name: Jonathan Schwarz
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
  * ID: 203672910
  */
+
 #include "Disc.h"
 
 Disc::Disc(const DiscSymbol &sym,const int &x, const int &y): symbol(sym) {

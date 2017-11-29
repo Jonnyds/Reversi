@@ -1,6 +1,9 @@
-//
-// Created by sahar on 11/27/17.
-//
+/*
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
+ * ID: 203672910
+ */
 
 #include <limits>
 #include "Menu.h"

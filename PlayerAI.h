@@ -1,6 +1,10 @@
-//
-// Created by sahar on 11/26/17.
-//
+/*
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
+ * ID: 203672910
+ */
+
 #include "PlayerType.h"
 #include "BoardLogic.h"
 #ifndef EX2_PLAYERAI_H
