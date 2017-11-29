@@ -37,6 +37,8 @@ void GameFlow::play() {
     Disc d;
     coordinates chose;
     vector<coordinates> possible_moves;
+    cout << "It's the black player's turn \n" << endl;
+
     while (!isGameOver()) {
 
         boardlogic->getBoard()->print();
