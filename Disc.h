@@ -65,7 +65,11 @@ public:
      * @return true of false (if the coordinates match).
      */
     bool    check_coordinates(const Disc &d);
-
+    /**
+     * operator overloading for disc comparing.
+     * @param d the Disc object we would like to compare.
+     * @return if the Discs have to same coordinates.
+     */
     bool operator ==(const Disc &d) const {
         return ((getloc_x() == d.getloc_x() && (getloc_y() == d.getloc_y())));
     }

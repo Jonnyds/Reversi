@@ -97,17 +97,37 @@ public:
      */
     void check_double();
 
-
-
+    /**
+     * @return the a vector of valid moves the playre can make;
+     */
     vector<coordinates> getValidMoves();
 
+    /**
+     * @return the player that is currently playing (the turn belongs to that player).
+     */
     PlayerType* getPlayerTurn();
+    /**
+     * @return the opponent player.
+     */
     PlayerType* getPlayerOpponent();
+    /**
+     * @return the game's playing board.
+     */
     Board* getBoard();
-
-    ~BoardLogic();
+    /**
+     * swaps between the player_turn and player_opponent when the turn is switched.
+     */
     void swapPlayers();
+    /**
+     * Clears the valid_points vector for reuse.
+     */
     void clearVec();
+
+    /**
+     * BoardLogic destructor releases the board, player_turn, player_opponent members which are dynamically allocated.
+     */
+    ~BoardLogic();
+
 
 
 protected:

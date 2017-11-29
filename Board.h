@@ -62,6 +62,10 @@ public:
      */
     void print();
 
+    /**
+     * makes a copy of the non primitive member Disc** which holds the game's board matrix;
+     * @param copyboard the board object we would like to copy.
+     */
     void copy_board(Board* copyboard);
 
     /**

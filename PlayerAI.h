@@ -13,16 +13,14 @@ class PlayerAI: public PlayerType {
 public:
 
     /**
-     * A human player's constructor.
+     * AI player constructor.
      * @param sym the player's symbol.
      */
 
     /**
-     * A default human player's constructor.
+     * A default AI player constructor.
      */
     PlayerAI();
-
-    virtual PlayerAI* clone() const;
 
     /**
      * Adds a disc to a player's list.
@@ -46,9 +44,26 @@ public:
      */
     DiscSymbol get_symbol() const;
 
+    /**
+     * A virtual function that makes returns the move a player would like to make (AI or console)
+     * @param bl the current game's BoardLogic object.
+     * @return the move a player decided on.
+     */
     BoardLogic* createDeepCopyOfLogic(BoardLogic* copybl) const;
 
+
+    /**
+     * A virtual function that makes returns the move a player would like to make (AI or console)
+     * @param bl the current game's BoardLogic object.
+     * @return the move a player decided on.
+     */
     virtual coordinates makeMove(BoardLogic *bl) const;
+
+    /**
+     * A virtual function that clones the Player object.
+     * @return a clone of the PlayerAI object.
+     */
+    virtual PlayerAI* clone() const;
 
 };
 

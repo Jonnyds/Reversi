@@ -33,10 +33,22 @@ public:
      */
     void play();
 
+    /**
+     * A function that prints a winning message according to the game's results.
+     */
     void winMassege();
 
+    /**
+     * A function that switches the turns.
+     * @param no_moves accepts true if the player does not have any moves to make or false if he does,
+     * according to this param it prints (or doesnt) a message.
+     */
     void switchTurn(bool no_moves);
 
+    /**
+     *
+     * @return true if the conditions for the game's end are met or false if not.
+     */
     bool isGameOver();
 
     /**
