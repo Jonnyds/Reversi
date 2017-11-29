@@ -20,9 +20,6 @@ Board::Board(const int &n) : size(n+1){
     }
 }
 
-Board*Board::clone() {
-    return new Board(*this);
-}
 
 void Board::print() {
     for (int i = 0; i < size; ++i) {

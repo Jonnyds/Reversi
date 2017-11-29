@@ -26,7 +26,6 @@ public:
      */
     explicit Board(const int &n);
 
-    Board *clone();
 
     /**
      * Default Board object constructor.
