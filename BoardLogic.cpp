@@ -241,9 +241,12 @@ void BoardLogic::swapPlayers() {
 }
 
 BoardLogic::~BoardLogic() {
-    /*
+    delete board;
     delete player_turn;
     delete player_opponent;
-     */
+}
+
+void BoardLogic::clearVec() {
+valid_points.clear();
 }
 

@@ -65,7 +65,8 @@ coordinates PlayerAI::makeMove(BoardLogic *bl) const {
         bl1->getPlayerTurn()->add_disc(dForAI);
         bl1->flipping(choseAI.x, choseAI.y);
 
-        BoardLogic *bl2 = new BoardLogic(bl1->getBoard(),bl1->getPlayerOpponent(),bl1->getPlayerTurn());
+        BoardLogic *bl2 = createDeepCopyOfLogic(bl1);
+        bl2->swapPlayers();
         bl2->valid_moves();
 
 
@@ -105,7 +106,6 @@ coordinates PlayerAI::makeMove(BoardLogic *bl) const {
         }
 
         delete bl2;
-
         delete bl1;
     }
 cout << "O played (" << bestChose.x << "," << bestChose.y << ")" << endl;

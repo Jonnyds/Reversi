@@ -10,7 +10,7 @@
 using namespace std;
 
 GameFlow::GameFlow(const int &n,const int &selected) {
-    playing_board = new Board(n);
+   // playing_board = new Board(n);
     switch (selected) {
         case 2:
             white = new PlayerHuman(O);
@@ -23,34 +23,34 @@ GameFlow::GameFlow(const int &n,const int &selected) {
 
     }
 
+    boardlogic = new BoardLogic(new Board(n),black,white);
     turn = X;
     no_more_moves = 0;
 }
 
 void GameFlow::init_game() {
-    playing_board->init(white,black);
+    boardlogic->getBoard()->init(white,black);
 }
 
 void GameFlow::play() {
     int i;
     Disc d;
     coordinates chose;
-    BoardLogic moves = BoardLogic(playing_board, black, white);
     vector<coordinates> possible_moves;
     while (!isGameOver()) {
 
-        playing_board->print();
+        boardlogic->getBoard()->print();
         cout << endl << "The white player has: " << white->get_disc_list().size() << " discs on board" << endl;
         cout << "The black player has: " << black->get_disc_list().size() << " discs on board \n" << endl;
-
+/*
          BoardLogic* moves;
         if (turn == white->get_symbol()) {
             moves = new BoardLogic(playing_board,white,black);
         } else {
             moves = new BoardLogic(playing_board,black,white);
         }
-
-        possible_moves = moves->valid_moves(); // checks the valid moves.
+*/
+        possible_moves = boardlogic->valid_moves(); // checks the valid moves.
 
         if (possible_moves.empty()) { // check if both players have no more moves then the game ends.
 
@@ -62,25 +62,24 @@ void GameFlow::play() {
 
             switch (turn) {
                 case X:
-                  chose = black->makeMove(moves);
+                  chose = black->makeMove(boardlogic);
                     d = Disc(turn, chose.x, chose.y);
-                    playing_board->add_to_board(d, chose.x, chose.y);
+                    boardlogic->getBoard()->add_to_board(d, chose.x, chose.y);
                     black->add_disc(d);
                     break;
                 case O:
-                   chose = white->makeMove(moves);
+                   chose = white->makeMove(boardlogic);
                     d = Disc(turn, chose.x, chose.y);
-                    playing_board->add_to_board(d, chose.x, chose.y);
+                    boardlogic->getBoard()->add_to_board(d, chose.x, chose.y);
                     white->add_disc(d);
                     break;
                 case E:
                     break;
             }
 
-            moves->flipping(chose.x, chose.y); //makes the move (changes discs on board).
+            boardlogic->flipping(chose.x, chose.y); //makes the move (changes discs on board).
 
             switchTurn(false);
-            delete moves;
         }
 
     }
@@ -92,7 +91,7 @@ void GameFlow::play() {
 bool GameFlow::isGameOver() {
 
     int total_disc = static_cast<int>(white->get_disc_list().size() + black->get_disc_list().size());
-    if (total_disc != pow(playing_board->get_size() - 1, 2) && (no_more_moves != 2)) {
+    if (total_disc != pow(boardlogic->getBoard()->get_size() - 1, 2) && (no_more_moves != 2)) {
         return false;
     }
     return true;
@@ -117,10 +116,14 @@ void GameFlow::switchTurn(bool no_moves) {
     }
     switch (turn) {
         case X:
+            boardlogic->swapPlayers();
+            boardlogic->clearVec();
             turn = O;
             cout << "It's the white player's turn \n" << endl;
             break;
         case O:
+            boardlogic->swapPlayers();
+            boardlogic->clearVec();
             turn = X;
             if(no_moves) {
 
@@ -133,8 +136,6 @@ void GameFlow::switchTurn(bool no_moves) {
 }
 
 GameFlow::~GameFlow() {
-    delete white;
-    delete black;
-    delete playing_board;
+    delete boardlogic;
 }
 

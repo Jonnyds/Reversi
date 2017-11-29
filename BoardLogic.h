@@ -105,8 +105,9 @@ public:
     PlayerType* getPlayerOpponent();
     Board* getBoard();
 
-    virtual ~BoardLogic();
+    ~BoardLogic();
     void swapPlayers();
+    void clearVec();
 
 
 protected:
