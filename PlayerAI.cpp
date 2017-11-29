@@ -108,6 +108,7 @@ coordinates PlayerAI::makeMove(BoardLogic *bl) const {
         delete bl2;
         delete bl1;
     }
+    delete virtualBoardLog;
 cout << "O played (" << bestChose.x << "," << bestChose.y << ")" << endl;
     return bestChose;
 
