@@ -12,6 +12,10 @@
 
 
 
+/**
+ * This object inherits from PlayerType (an abstract class) and iד responsible for managing the AI player's
+ * members and implementation of PlayerType.
+ */
 
 class PlayerAI: public PlayerType {
 public:

@@ -15,7 +15,7 @@ using namespace std;
 #define REVERSI_PLAYER_H
 
 /**
- * This object inherits from PlayerType (an abstract class) and in responsible for managing the human player's
+ * This object inherits from PlayerType (an abstract class) and iד responsible for managing the human player's
  * members and implementation of PlayerType.
  */
 class PlayerHuman: public PlayerType {
