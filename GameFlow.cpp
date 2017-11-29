@@ -135,6 +135,18 @@ void GameFlow::switchTurn(bool no_moves) {
     }
 }
 
+BoardLogic *GameFlow::getBoardLogic() {
+    return boardlogic;
+}
+
+int GameFlow::getNoMoreMoves() {
+    return no_more_moves;
+}
+
+DiscSymbol GameFlow::getTurn() {
+    return turn;
+}
+
 GameFlow::~GameFlow() {
     delete boardlogic;
 }

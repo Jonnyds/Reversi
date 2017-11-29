@@ -5,7 +5,6 @@
 
 #include "BoardLogic.h"
 #include "PlayerHuman.h"
-#include "PlayerAI.h"
 
 
 BoardLogic::BoardLogic(Board *game_board,  PlayerType *player, PlayerType *opponent) :
