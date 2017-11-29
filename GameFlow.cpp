@@ -37,6 +37,8 @@ void GameFlow::play() {
     Disc d;
     coordinates chose;
     vector<coordinates> possible_moves;
+    cout << "It's the black player's turn \n" << endl;
+
     while (!isGameOver()) {
 
         boardlogic->getBoard()->print();
@@ -133,6 +135,18 @@ void GameFlow::switchTurn(bool no_moves) {
         case E:
             break;
     }
+}
+
+BoardLogic *GameFlow::getBoardLogic() {
+    return boardlogic;
+}
+
+int GameFlow::getNoMoreMoves() {
+    return no_more_moves;
+}
+
+DiscSymbol GameFlow::getTurn() {
+    return turn;
 }
 
 GameFlow::~GameFlow() {

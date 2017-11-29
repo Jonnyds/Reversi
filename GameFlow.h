@@ -50,6 +50,20 @@ public:
      * @return true if the conditions for the game's end are met or false if not.
      */
     bool isGameOver();
+    /**
+     * @return the game's boardlogic object.
+     */
+    BoardLogic* getBoardLogic();
+
+    /**
+     * @return the no_more_moves member.
+     */
+    int getNoMoreMoves();
+
+    /**
+     * @return the turn member.
+     */
+    DiscSymbol getTurn();
 
     /**
      * GameFlow object destructor.
