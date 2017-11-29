@@ -29,7 +29,6 @@ public:
     BoardLogic(Board *game_board,PlayerType *player,PlayerType *opponent);
 
     BoardLogic() {};
-    BoardLogic* clone();
 
     /**
      * Checks the coordinates of the moves the current player (in turn) can make.

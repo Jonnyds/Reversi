@@ -43,7 +43,7 @@ void PlayerType::copyVector(vector<Disc> copyVec)  {
 Disc d;
     for (int i = 0; i < copyVec.size() ; ++i) {
         d = Disc(copyVec[i].get_sym(),copyVec[i].getloc_x(),copyVec[i].getloc_y());
-        dlist[i] = d;
+        add_disc(d);
     }
 }
 

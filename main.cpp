@@ -9,7 +9,7 @@
 
 using namespace std;
 
-const int n = 4; // n - board's size.
+const int n = 8; // n - board's size.
 /**
  * @return 0;
  */

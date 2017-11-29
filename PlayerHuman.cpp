@@ -62,7 +62,7 @@ coordinates PlayerHuman::makeMove(BoardLogic *bl) const {
         if(!move_found) {
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            cout << "Please enter numbers only! \n";
+            cout << "Your input is not valid \n";
         }
     }
 
@@ -71,10 +71,6 @@ coordinates PlayerHuman::makeMove(BoardLogic *bl) const {
     return coor;
 
     // adds the chosen location disc to board
-
-
-
-
 }
 
 PlayerHuman* PlayerHuman::clone() const {

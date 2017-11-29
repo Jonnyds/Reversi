@@ -64,7 +64,7 @@ public:
      * @param d checks if the coordinates of d match this objects coordinates.
      * @return true of false (if the coordinates match).
      */
-    bool    check_coordinates(const Disc &d);
+
     /**
      * operator overloading for disc comparing.
      * @param d the Disc object we would like to compare.

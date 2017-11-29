@@ -23,8 +23,5 @@ DiscSymbol Disc::get_sym() const {
     return symbol;
 }
 
-bool Disc::check_coordinates(const Disc &d) {
-    return (coordinates_on_board.x == d.getloc_x() && coordinates_on_board.y == d.getloc_y());
-}
 
 Disc::Disc() {};
