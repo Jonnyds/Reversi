@@ -11,20 +11,7 @@
 using namespace std;
 
 PlayerHuman::PlayerHuman(DiscSymbol sym): PlayerType(sym){}
-/*
-PlayerHuman::PlayerHuman(PlayerHuman &copyHuman) {
-    PlayerHuman copyPlayer = PlayerHuman(copyHuman.get_symbol());
-    counter = copyHuman.get_disc_list().size();
 
-    Disc d;
-    for (int i = 0; i < copyHuman.get_disc_list().size(); i++) {
-        Disc copyDisc = copyHuman.get_disc_list()[i];
-        d = Disc(copyDisc.get_sym(), copyDisc.getloc_x(), copyDisc.getloc_y());
-        copyPlayer.add_disc(d);
-    }
-
-}
-*/
 void PlayerHuman::add_disc(const Disc &d) {
     PlayerType::add_disc(d);
 }

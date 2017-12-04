@@ -15,7 +15,7 @@ int Menu::choosePlayer() {
     bool validInput = false;
 
     cout << endl << "Welcome to REVERSI!" << endl << endl<< "Please select the player you want to play with:" << endl
-         << "AI opponent: 1" << endl << "Console opponent: 2" << endl;
+         << "AI opponent: 1" << endl << "Console opponent: 2" << endl << "Remote opponent: 3" << endl;
 
     while(!validInput) {
         cin >> chose;

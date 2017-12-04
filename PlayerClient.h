@@ -2,11 +2,13 @@
 // Created by sahar on 12/4/17.
 //
 
-#ifndef ROOT_PLAYERCLIENT_H
-#define ROOT_PLAYERCLIENT_H
+#ifndef REVERSI_CLIENT_H
+#define REVERSI_CLIENT_H
 
 
-class PlayerClient {
+#include "PlayerType.h"
+
+class PlayerClient: public PlayerType {
 
 //#ifndef REVERSI_CLIENT_H
 //#define REVERSI_CLIENT_H
@@ -17,6 +19,7 @@ class PlayerClient {
         PlayerClient(const char *serverIP, int serverPort);
         void connectToServer();
         int sendExercise(int arg1, char op, int arg2);
+        virtual coordinates makeMove(BoardLogic *bl) const;
     private:
         const char *serverIP;
         int serverPort;

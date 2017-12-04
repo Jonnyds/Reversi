@@ -15,6 +15,7 @@ using namespace std;
 PlayerClient::PlayerClient(const char *serverIP, int serverPort): serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
     cout << "Client" << endl;
 }
+
 void PlayerClient::connectToServer() {
 // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -47,6 +48,7 @@ void PlayerClient::connectToServer() {
     }
     cout<<"Connected to server"<<endl;
 }
+
 int PlayerClient::sendExercise(int arg1, char op, int arg2) {
 // Write the exercise arguments to the socket
     int n = write(clientSocket, &arg1, sizeof(arg1));
@@ -69,5 +71,9 @@ int PlayerClient::sendExercise(int arg1, char op, int arg2) {
                 "Error reading result from socket";
     }
     return result;
+}
+
+coordinates PlayerClient::makeMove(BoardLogic *bl) const {
+    return coordinates();
 }
 
