@@ -6,9 +6,9 @@
 #define REVERSI_CLIENT_H
 
 
-#include "PlayerType.h"
+#include "PlayerHuman.h"
 
-class PlayerClient: public PlayerType {
+class PlayerClient: public PlayerHuman {
 
 //#ifndef REVERSI_CLIENT_H
 //#define REVERSI_CLIENT_H
@@ -16,10 +16,11 @@ class PlayerClient: public PlayerType {
 
 
     public:
-        PlayerClient(const char *serverIP, int serverPort);
+        PlayerClient(const char *serverIP, int serverPort, DiscSymbol sym);
         void connectToServer();
         int sendExercise(int arg1, char op, int arg2);
         virtual coordinates makeMove(BoardLogic *bl) const;
+
     private:
         const char *serverIP;
         int serverPort;

@@ -10,10 +10,19 @@
 #include <netdb.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
+
 using namespace std;
 
-PlayerClient::PlayerClient(const char *serverIP, int serverPort): serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
-    cout << "Client" << endl;
+PlayerClient::PlayerClient(const char *serverIP, int serverPort ,DiscSymbol sym): serverIP(serverIP)
+        , serverPort(serverPort), clientSocket(0) ,PlayerHuman(sym){
+
+    try {
+        connectToServer();
+    } catch (const char *msg) {
+        cout << "Failed to connect to server. Reason:" << msg << endl;
+        exit(-1);
+    }
 }
 
 void PlayerClient::connectToServer() {

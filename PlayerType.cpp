@@ -9,7 +9,7 @@
 #include "PlayerType.h"
 
 
-PlayerType::PlayerType (DiscSymbol sym): counter(0), symbol(sym){
+PlayerType::PlayerType (DiscSymbol &sym): counter(0), symbol(sym){
 }
 
 void PlayerType::add_disc(const Disc &d) {

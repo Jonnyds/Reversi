@@ -31,6 +31,7 @@ public:
 private:
     int console;
     int ai;
+    int remote;
 };
 
 #endif //EX2_MENU_H

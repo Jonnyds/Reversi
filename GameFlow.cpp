@@ -25,12 +25,12 @@ GameFlow::GameFlow(const int &n,const int &selected) {
             black = new PlayerHuman(X);
             break;
         case 3:
-            black = new PlayerClient("127.0.0.1", 8000);
-            try {
-               black = static_cast<PlayerClient&>();
-            }
-            break;
+            black = new PlayerClient("127.0.0.1", 8000, X);
+            //PlayerClient *playercheck = dynamic_cast<PlayerClient*>(black);
+            //playercheck->connectToServer();
 
+
+            break;
     }
 
     boardlogic = new BoardLogic(new Board(n),black,white);

@@ -24,21 +24,6 @@ PlayerAI::PlayerAI(PlayerAI &copyAI) {
     }
 }
 */
-void PlayerAI::add_disc(const Disc &d) {
-    PlayerType::add_disc(d);
-}
-
-void PlayerAI::remove_disc(const Disc &d) {
-    PlayerType::remove_disc(d);
-}
-
-vector<Disc> PlayerAI::get_disc_list() const {
-    return PlayerType::get_disc_list();
-}
-
-DiscSymbol PlayerAI::get_symbol() const {
-    return PlayerType::get_symbol();
-}
 
 coordinates PlayerAI::makeMove(BoardLogic *bl) const {
 

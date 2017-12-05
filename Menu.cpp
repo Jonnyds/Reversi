@@ -8,7 +8,7 @@
 #include <limits>
 #include "Menu.h"
 
-Menu::Menu(): ai(1), console(2){}
+Menu::Menu(): ai(1), console(2), remote(3){}
 
 int Menu::choosePlayer() {
     int chose = 1; // defult chose.
@@ -19,7 +19,7 @@ int Menu::choosePlayer() {
 
     while(!validInput) {
         cin >> chose;
-        if ((chose == ai) || (chose == console)) {
+        if ((chose == ai) || (chose == console) || (chose == remote)) {
             validInput = true;
             cout << endl << "Here we go!!!!" << endl << endl;
         } else {

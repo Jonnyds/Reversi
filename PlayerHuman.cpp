@@ -12,22 +12,6 @@ using namespace std;
 
 PlayerHuman::PlayerHuman(DiscSymbol sym): PlayerType(sym){}
 
-void PlayerHuman::add_disc(const Disc &d) {
-    PlayerType::add_disc(d);
-}
-
-void PlayerHuman::remove_disc(const Disc &d) {
-    PlayerType::remove_disc(d);
-}
-
-vector<Disc> PlayerHuman::get_disc_list() const {
-    return PlayerType::get_disc_list();
-}
-
-DiscSymbol PlayerHuman::get_symbol() const {
-    return PlayerType::get_symbol();
-}
-
 coordinates PlayerHuman::makeMove(BoardLogic *bl) const {
     bool move_found = false;
     coordinates coor;

@@ -24,7 +24,7 @@ public:
      * Playertype constructor.
      * @param sym the player's symbol.
      */
-    explicit PlayerType (DiscSymbol sym);
+    explicit PlayerType (DiscSymbol &sym);
 
     /**
      * a default constructor for the playertype object.
