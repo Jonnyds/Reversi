@@ -17,12 +17,15 @@ using namespace std;
 PlayerClient::PlayerClient(const char *serverIP, int serverPort ,DiscSymbol sym): serverIP(serverIP)
         , serverPort(serverPort), clientSocket(0) ,PlayerHuman(sym){
 
+
+
     try {
         connectToServer();
     } catch (const char *msg) {
         cout << "Failed to connect to server. Reason:" << msg << endl;
         exit(-1);
     }
+
 }
 
 void PlayerClient::connectToServer() {
@@ -31,6 +34,7 @@ void PlayerClient::connectToServer() {
     if (clientSocket == -1) {
         throw "Error opening socket";
     }
+
 // Convert the ip string to a network address
     struct in_addr address;
     if (!inet_aton(serverIP, &address)) {
@@ -43,6 +47,7 @@ void PlayerClient::connectToServer() {
     if(server == NULL) {
         throw "Host is unreachable";
     }
+
 // Create a structure for the server address
     struct sockaddr_in serverAddress;
     bzero((char*)&address,sizeof(address));
@@ -51,8 +56,7 @@ void PlayerClient::connectToServer() {
 //htonsconverts values between host and network byte orders
     serverAddress.sin_port = htons(serverPort);
 // Establish a connection with the TCP server
-    if(connect(clientSocket, (
-            struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
+    if(connect(clientSocket, (struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
     cout<<"Connected to server"<<endl;

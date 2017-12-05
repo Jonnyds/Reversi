@@ -13,8 +13,6 @@ class PlayerClient: public PlayerHuman {
 //#ifndef REVERSI_CLIENT_H
 //#define REVERSI_CLIENT_H
 
-
-
     public:
         PlayerClient(const char *serverIP, int serverPort, DiscSymbol sym);
         void connectToServer();
