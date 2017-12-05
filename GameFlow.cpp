@@ -6,7 +6,9 @@
  */
 
 #include "GameFlow.h"
+#include "PlayerClient.h"
 #include <cmath>
+
 
 
 using namespace std;
@@ -21,6 +23,12 @@ GameFlow::GameFlow(const int &n,const int &selected) {
         case 1:
             white = new PlayerAI();
             black = new PlayerHuman(X);
+            break;
+        case 3:
+            black = new PlayerClient("127.0.0.1", 8000);
+            try {
+               black = static_cast<PlayerClient&>();
+            }
             break;
 
     }
