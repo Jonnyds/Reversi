@@ -2,7 +2,7 @@
 // Created by sahar on 12/4/17.
 //
 
-#include "PlayerClient.h"
+#include "PlayerClientActive.h"
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -14,7 +14,7 @@
 
 using namespace std;
 
-PlayerClient::PlayerClient(const char *serverIP, int serverPort ,DiscSymbol sym): serverIP(serverIP)
+PlayerClientActive::PlayerClientActive(const char *serverIP, int serverPort ,DiscSymbol sym): serverIP(serverIP)
         , serverPort(serverPort), clientSocket(0) ,PlayerHuman(sym){
 
 
@@ -28,7 +28,7 @@ PlayerClient::PlayerClient(const char *serverIP, int serverPort ,DiscSymbol sym)
 
 }
 
-void PlayerClient::connectToServer() {
+void PlayerClientActive::connectToServer() {
 // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
@@ -62,7 +62,7 @@ void PlayerClient::connectToServer() {
     cout<<"Connected to server"<<endl;
 }
 
-int PlayerClient::sendExercise(int arg1, char op, int arg2) {
+int PlayerClientActive::sendExercise(int arg1, char op, int arg2) {
 // Write the exercise arguments to the socket
     int n = write(clientSocket, &arg1, sizeof(arg1));
     if (n == -1) {
@@ -86,7 +86,8 @@ int PlayerClient::sendExercise(int arg1, char op, int arg2) {
     return result;
 }
 
-coordinates PlayerClient::makeMove(BoardLogic *bl) const {
+coordinates PlayerClientActive::makeMove(BoardLogic *bl) const {
+
     return coordinates();
 }
 

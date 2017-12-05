@@ -6,28 +6,25 @@
  */
 
 #include "GameFlow.h"
-#include "PlayerClient.h"
+#include "PlayerClientActive.h"
 #include <cmath>
 
 
 
 using namespace std;
 
-GameFlow::GameFlow(const int &n,const int &selected) {
-   // playing_board = new Board(n);
+GameFlow::GameFlow(const int &n,const int &selected): selected(selected) {
     switch (selected) {
-        case 2:
-            white = new PlayerHuman(O);
-            black = new PlayerHuman(X);
-            break;
         case 1:
             white = new PlayerAI();
             black = new PlayerHuman(X);
             break;
+        case 2:
+            white = new PlayerHuman(O);
+            black = new PlayerHuman(X);
+            break;
         case 3:
-            black = new PlayerClient("127.0.0.1", 8000, X);
-            //PlayerClient *playercheck = dynamic_cast<PlayerClient*>(black);
-            //playercheck->connectToServer();
+            black = new PlayerClientActive("127.0.0.1", 8000, X);
             break;
     }
 
@@ -52,14 +49,7 @@ void GameFlow::play() {
         boardlogic->getBoard()->print();
         cout << endl << "The white player has: " << white->get_disc_list().size() << " discs on board" << endl;
         cout << "The black player has: " << black->get_disc_list().size() << " discs on board \n" << endl;
-/*
-         BoardLogic* moves;
-        if (turn == white->get_symbol()) {
-            moves = new BoardLogic(playing_board,white,black);
-        } else {
-            moves = new BoardLogic(playing_board,black,white);
-        }
-*/
+
         possible_moves = boardlogic->valid_moves(); // checks the valid moves.
 
         if (possible_moves.empty()) { // check if both players have no more moves then the game ends.

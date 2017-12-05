@@ -73,7 +73,7 @@ public:
     ~GameFlow();
 
 private:
-  //  Board* playing_board; // The game's board object.
+    int selected; // Type of game (console, AI or remote).
     PlayerType* black; // The black player (with symbol X).
     PlayerType* white; // The white player (with symbol O).
     DiscSymbol turn; // Which player does the turn belong to.
