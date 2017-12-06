@@ -41,7 +41,7 @@ void GameFlow::init_game() {
 }
 
 void GameFlow::play() {
-
+    int i;
     Disc d;
     coordinates chose;
     coordinates noMoveMSG;
@@ -60,7 +60,19 @@ void GameFlow::play() {
             if (selected == 3) {
                 noMoveMSG.x = 0;
                 noMoveMSG.y = 0;
-                write((playerClient) turn.getClientSocket, &noMoveMSG, sizeof(noMoveMSG));
+                switch (turn) {
+
+                    case X:
+                        i = ((PlayerClient *) black)->getClientSocket();
+                        write(i, &noMoveMSG, sizeof(noMoveMSG));
+                        break;
+
+                    case O:
+                        i = ((PlayerClient *) white)->getClientSocket();
+                        write(i, &noMoveMSG, sizeof(noMoveMSG));
+                        break;
+                }
+
         }
             no_more_moves++;
             switchTurn(true);
