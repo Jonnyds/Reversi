@@ -6,7 +6,7 @@
  */
 
 #include "GameFlow.h"
-#include "PlayerClientActive.h"
+#include "PlayerClient.h"
 #include <cmath>
 
 
@@ -24,7 +24,7 @@ GameFlow::GameFlow(const int &n,const int &selected): selected(selected) {
             black = new PlayerHuman(X);
             break;
         case 3:
-            black = new PlayerClientActive("127.0.0.1", 8000, X);
+            black = new PlayerClient("127.0.0.1", 8000, X);
             break;
     }
 
