@@ -96,7 +96,7 @@ coordinates PlayerClient::makeMove(BoardLogic *bl) const {
 }
 
 
-void PlayerClient::setClientSocket(int &socket) {
+void PlayerClient::setClientSocket(int socket) {
     clientSocket = socket;
 }
 

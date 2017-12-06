@@ -17,7 +17,7 @@ class PlayerClient: public PlayerHuman {
         PlayerClient(const char *serverIP, int serverPort, DiscSymbol sym);
         void connectToServer();
         int getClientSocket();
-        void setClientSocket(int &socket);
+        void setClientSocket(int socket);
         virtual coordinates makeMove(BoardLogic *bl) const;
 
     private:
