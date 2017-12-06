@@ -17,13 +17,6 @@ using namespace std;
 PlayerClient::PlayerClient(const char *serverIP, int serverPort ,DiscSymbol sym): serverIP(serverIP)
         , serverPort(serverPort), clientSocket(0) ,PlayerHuman(sym){
 
-    try {
-        connectToServer();
-    } catch (const char *msg) {
-        cout << "Failed to connect to server. Reason:" << msg << endl;
-        exit(-1);
-    }
-
 }
 
 void PlayerClient::connectToServer() {
@@ -65,6 +58,7 @@ void PlayerClient::connectToServer() {
     if (n == -1) {
         throw "Error reading result from socket";
     }
+    cout << playernumber << endl;
     cout<<"Connected to server"<<endl;
 }
 
@@ -83,6 +77,7 @@ coordinates PlayerClient::makeMove(BoardLogic *bl) const {
 
     } else {
 
+        cout << "waiting for the other player's move:" << endl;
         n = read(clientSocket, &coor, sizeof(coor));
         if (n == -1) {
             throw "Error reading result from socket";
@@ -102,5 +97,13 @@ void PlayerClient::setClientSocket(int socket) {
 
 int PlayerClient::getClientSocket() {
     return clientSocket;
+}
+
+int PlayerClient::getPlayerNum() {
+    return playernumber;
+}
+
+void PlayerClient::setPlayerNum(int num) {
+    playernumber = num;
 }
 

@@ -9,7 +9,7 @@
 #include "PlayerClient.h"
 #include <cmath>
 #include <unistd.h>
-
+#include <stdlib.h>
 
 using namespace std;
 
@@ -25,8 +25,15 @@ GameFlow::GameFlow(const int &n,const int &selected): selected(selected) {
             break;
         case 3:
             black = new PlayerClient("127.0.0.1", 8000, X);
+            try {
+                ((PlayerClient *) black)->connectToServer();
+            } catch (const char *msg) {
+                cout << "Failed to connect to server. Reason:" << msg << endl;
+                exit(-1);
+            }
             white = new PlayerClient("127.0.0.1", 8000, O);
             ((PlayerClient *) black)->setClientSocket(((PlayerClient *) black)->getClientSocket());
+            ((PlayerClient *) black)->setPlayerNum(((PlayerClient *) black)->getPlayerNum());
             break;
     }
 

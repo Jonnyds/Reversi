@@ -18,6 +18,8 @@ class PlayerClient: public PlayerHuman {
         void connectToServer();
         int getClientSocket();
         void setClientSocket(int socket);
+        int getPlayerNum();
+        void setPlayerNum(int num);
         virtual coordinates makeMove(BoardLogic *bl) const;
 
     private:
