@@ -109,10 +109,12 @@ void GameFlow::play() {
 
 bool GameFlow::isGameOver() {
 
+    int n;
     int total_disc = static_cast<int>(white->get_disc_list().size() + black->get_disc_list().size());
     if (total_disc != pow(boardlogic->getBoard()->get_size() - 1, 2) && (no_more_moves != 2)) {
         return false;
     }
+    n = write(((PlayerClient *) black)->getClientSocket(), &total_disc, sizeof(total_disc));
     return true;
 }
 
@@ -156,10 +158,6 @@ void GameFlow::switchTurn(bool no_moves) {
 
 BoardLogic *GameFlow::getBoardLogic() {
     return boardlogic;
-}
-
-int GameFlow::getNoMoreMoves() {
-    return no_more_moves;
 }
 
 DiscSymbol GameFlow::getTurn() {
