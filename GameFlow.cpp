@@ -8,7 +8,7 @@
 #include "GameFlow.h"
 #include "PlayerClient.h"
 #include <cmath>
-
+#include <unistd.h>
 
 
 using namespace std;
@@ -38,9 +38,10 @@ void GameFlow::init_game() {
 }
 
 void GameFlow::play() {
-    int i;
+
     Disc d;
     coordinates chose;
+    coordinates noMoveMSG;
     vector<coordinates> possible_moves;
     cout << "It's the black player's turn \n" << endl;
 
@@ -53,7 +54,11 @@ void GameFlow::play() {
         possible_moves = boardlogic->valid_moves(); // checks the valid moves.
 
         if (possible_moves.empty()) { // check if both players have no more moves then the game ends.
-
+            if (selected == 3) {
+                noMoveMSG.x = 0;
+                noMoveMSG.y = 0;
+                write((playerClient) turn.getClientSocket, &noMoveMSG, sizeof(noMoveMSG));
+        }
             no_more_moves++;
             switchTurn(true);
 
