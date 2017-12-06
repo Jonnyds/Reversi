@@ -25,6 +25,9 @@ GameFlow::GameFlow(const int &n,const int &selected): selected(selected) {
             break;
         case 3:
             black = new PlayerClient("127.0.0.1", 8000, X);
+
+
+
             break;
     }
 

@@ -17,8 +17,6 @@ using namespace std;
 PlayerClient::PlayerClient(const char *serverIP, int serverPort ,DiscSymbol sym): serverIP(serverIP)
         , serverPort(serverPort), clientSocket(0) ,PlayerHuman(sym){
 
-
-
     try {
         connectToServer();
     } catch (const char *msg) {
@@ -29,6 +27,7 @@ PlayerClient::PlayerClient(const char *serverIP, int serverPort ,DiscSymbol sym)
 }
 
 void PlayerClient::connectToServer() {
+    int n;
 // Create a socket point
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (clientSocket == -1) {
@@ -53,41 +52,55 @@ void PlayerClient::connectToServer() {
     bzero((char*)&address,sizeof(address));
     serverAddress.sin_family = AF_INET;
     memcpy((char*)&serverAddress.sin_addr.s_addr, (char*)server->h_addr, server->h_length);
+
 //htonsconverts values between host and network byte orders
     serverAddress.sin_port = htons(serverPort);
+
 // Establish a connection with the TCP server
     if(connect(clientSocket, (struct sockaddr*)&serverAddress,sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
-    cout<<"Connected to server"<<endl;
-}
 
-int PlayerClient::sendExercise(int arg1, char op, int arg2) {
-// Write the exercise arguments to the socket
-    int n = write(clientSocket, &arg1, sizeof(arg1));
+    n = read(clientSocket, &playernumber, sizeof(playernumber));
     if (n == -1) {
-        throw "Error writing arg1to socket";
+        throw "Error reading result from socket";
     }
-    n = write(clientSocket, &op, sizeof(op));
-    if (n == -1) {
-        throw "Error writing op to socket";
-    }
-    n = write(clientSocket, &arg2, sizeof(arg2));
-    if (n == -1) {
-        throw "Error writing arg2to socket";
-    }
-// Read the result from the server
-    int result;
-    n = read(clientSocket, &result, sizeof(result));
-    if (n == -1) {
-        throw
-                "Error reading result from socket";
-    }
-    return result;
+    cout<<"Connected to server"<<endl;
 }
 
 coordinates PlayerClient::makeMove(BoardLogic *bl) const {
 
+    coordinates coor;
+    int n;
+
+    if((symbol == X && playernumber == 1) || (symbol == O && playernumber == 2)) {
+      coor =  PlayerHuman::makeMove(bl);
+        n = write(clientSocket, &coor, sizeof(coor));
+        if (n == -1) {
+            throw "Error writing result from socket";
+        }
+        return coor;
+
+    } else {
+
+        n = read(clientSocket, &coor, sizeof(coor));
+        if (n == -1) {
+            throw "Error reading result from socket";
+        }
+        return coor;
+
+    }
+
+
     return coordinates();
+}
+
+
+void PlayerClient::setClientSocket(int &socket) {
+    clientSocket = socket;
+}
+
+int PlayerClient::getClientSocket() {
+    return clientSocket;
 }
 

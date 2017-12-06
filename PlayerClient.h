@@ -16,13 +16,15 @@ class PlayerClient: public PlayerHuman {
     public:
         PlayerClient(const char *serverIP, int serverPort, DiscSymbol sym);
         void connectToServer();
-        int sendExercise(int arg1, char op, int arg2);
+        int getClientSocket();
+        void setClientSocket(int &socket);
         virtual coordinates makeMove(BoardLogic *bl) const;
 
     private:
         const char *serverIP;
         int serverPort;
         int clientSocket;
+        int playernumber;
 
 };
 
