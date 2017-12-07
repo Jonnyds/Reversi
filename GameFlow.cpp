@@ -30,7 +30,7 @@ GameFlow::GameFlow(const int &n,const int &selected): selected(selected) {
             string data;
             int port;
             ifstream inFile;
-            inFile.open("/home/jonathan/CLionProjects/Reversi & tests/Reversi/setting.txt");
+            inFile.open("/home/jonathan/CLionProjects/Reversi & tests/src/Reversi/setting.txt");
             if(!inFile.is_open()){
                 cout << "no no" << endl;
             }
