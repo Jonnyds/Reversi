@@ -65,15 +65,17 @@ void PlayerClient::connectToServer() {
 coordinates PlayerClient::makeMove(BoardLogic *bl) const {
 
     coordinates coor;
-    int n;
+    int n, i, j;
 
     if((symbol == X && playernumber == 1) || (symbol == O && playernumber == 2)) {
       coor =  PlayerHuman::makeMove(bl);
-        n = write(clientSocket, &coor.x, sizeof(coor));
+        i = coor.x;
+        n = write(clientSocket, &i, sizeof(i));
         if (n == -1) {
             throw "Error writing result from socket";
         }
-        n = write(clientSocket, &coor.y, sizeof(coor));
+        j = coor.y;
+        n = write(clientSocket, &j, sizeof(j));
         if (n == -1) {
             throw "Error writing result from socket";
         }
@@ -82,14 +84,18 @@ coordinates PlayerClient::makeMove(BoardLogic *bl) const {
     } else {
 
         cout << "waiting for the other player's move:" << endl;
-        n = read(clientSocket, &coor, sizeof(coor));
+        n = read(clientSocket, &i, sizeof(i));
         if (n == -1) {
             throw "Error reading result from socket";
         }
-       /* n = read(clientSocket, &coor.y, sizeof(coor));
+        n = read(clientSocket, &j, sizeof(j));
         if (n == -1) {
             throw "Error reading result from socket";
-        }*/
+        }
+
+        cout << "Your opponent's move is (" << i << ',' << j <<')' <<endl << endl;
+        coor.x = i;
+        coor.y = j;
         return coor;
 
     }

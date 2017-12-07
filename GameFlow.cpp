@@ -32,7 +32,7 @@ GameFlow::GameFlow(const int &n,const int &selected): selected(selected) {
                 exit(-1);
             }
             white = new PlayerClient("127.0.0.1", 8000, O);
-            ((PlayerClient *) black)->setClientSocket(((PlayerClient *) black)->getClientSocket());
+            ((PlayerClient *) white)->setClientSocket(((PlayerClient *) black)->getClientSocket());
             ((PlayerClient *) white)->setPlayerNum(((PlayerClient *) black)->getPlayerNum());
             break;
     }
@@ -47,10 +47,9 @@ void GameFlow::init_game() {
 }
 
 void GameFlow::play() {
-    int i;
+    int i, noMoveMSG = 0, n;
     Disc d;
     coordinates chose;
-    coordinates noMoveMSG;
     vector<coordinates> possible_moves;
     cout << "It's the black player's turn \n" << endl;
 
@@ -64,18 +63,30 @@ void GameFlow::play() {
 
         if (possible_moves.empty()) { // check if both players have no more moves then the game ends.
             if (selected == 3) {
-                noMoveMSG.x = 0;
-                noMoveMSG.y = 0;
                 switch (turn) {
 
                     case X:
                         i = ((PlayerClient *) black)->getClientSocket();
-                        write(i, &noMoveMSG, sizeof(noMoveMSG));
+                       n = write(i, &noMoveMSG, sizeof(noMoveMSG));
+                        if (n == -1) {
+                            throw "Error writing result from socket";
+                        }
+                        n = write(i, &noMoveMSG, sizeof(noMoveMSG));
+                        if (n == -1) {
+                            throw "Error writing result from socket";
+                        }
                         break;
 
                     case O:
                         i = ((PlayerClient *) white)->getClientSocket();
-                        write(i, &noMoveMSG, sizeof(noMoveMSG));
+                        n = write(i, &noMoveMSG, sizeof(noMoveMSG));
+                        if (n == -1) {
+                            throw "Error writing result from socket";
+                        }
+                        n = write(i, &noMoveMSG, sizeof(noMoveMSG));
+                        if (n == -1) {
+                            throw "Error writing result from socket";
+                        }
                         break;
                 }
 
@@ -116,12 +127,35 @@ void GameFlow::play() {
 
 bool GameFlow::isGameOver() {
 
-    int n;
+    int n , end = -6;
     int total_disc = static_cast<int>(white->get_disc_list().size() + black->get_disc_list().size());
     if (total_disc != pow(boardlogic->getBoard()->get_size() - 1, 2) && (no_more_moves != 2)) {
         return false;
     }
-    n = write(((PlayerClient *) black)->getClientSocket(), &total_disc, sizeof(total_disc));
+    if(selected == 3) {
+        switch (turn) {
+            case X:
+                n = write(((PlayerClient *) black)->getClientSocket(), &end, sizeof(end));
+                if (n == -1) {
+                    throw "Error writing result from socket";
+                }
+                n = write(((PlayerClient *) black)->getClientSocket(), &end, sizeof(end));
+                if (n == -1) {
+                    throw "Error writing result from socket";
+                }
+                break;
+            case O:
+                n = write(((PlayerClient *) white)->getClientSocket(), &end, sizeof(end));
+                if (n == -1) {
+                    throw "Error writing result from socket";
+                }
+                n = write(((PlayerClient *) white)->getClientSocket(), &end, sizeof(end));
+                if (n == -1) {
+                    throw "Error writing result from socket";
+                }
+                break;
+        }
+    }
     return true;
 }
 
