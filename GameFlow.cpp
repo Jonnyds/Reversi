@@ -10,6 +10,7 @@
 #include <cmath>
 #include <unistd.h>
 #include <stdlib.h>
+#include <fstream>
 
 using namespace std;
 
@@ -24,14 +25,30 @@ GameFlow::GameFlow(const int &n,const int &selected): selected(selected) {
             black = new PlayerHuman(X);
             break;
         case 3:
-            black = new PlayerClient("127.0.0.1", 8000, X);
+
+            string IP;
+            string data;
+            int port;
+            ifstream inFile;
+            inFile.open("/home/jonathan/CLionProjects/Reversi & tests/Reversi/setting.txt");
+            if(!inFile.is_open()){
+                cout << "no no" << endl;
+            }
+            inFile >> data;
+            cout<<"IP: "<<data<<endl;
+            inFile >> port;
+            cout<<"port: "<<port<<endl;
+            inFile.close();
+            const char * serverIP = data.c_str();
+
+            black = new PlayerClient(serverIP, port, X);
             try {
                 ((PlayerClient *) black)->connectToServer();
             } catch (const char *msg) {
                 cout << "Failed to connect to server. Reason:" << msg << endl;
                 exit(-1);
             }
-            white = new PlayerClient("127.0.0.1", 8000, O);
+            white = new PlayerClient(serverIP, port, O);
             ((PlayerClient *) white)->setClientSocket(((PlayerClient *) black)->getClientSocket());
             ((PlayerClient *) white)->setPlayerNum(((PlayerClient *) black)->getPlayerNum());
             break;
@@ -100,22 +117,26 @@ void GameFlow::play() {
             switch (turn) {
                 case X:
                   chose = black->makeMove(boardlogic);
-                    d = Disc(turn, chose.x, chose.y);
-                    boardlogic->getBoard()->add_to_board(d, chose.x, chose.y);
-                    black->add_disc(d);
+                    if((chose.x != 0) && (chose.y != 0)) {
+                        d = Disc(turn, chose.x, chose.y);
+                        boardlogic->getBoard()->add_to_board(d, chose.x, chose.y);
+                        black->add_disc(d);
+                    }
                     break;
                 case O:
                    chose = white->makeMove(boardlogic);
-                    d = Disc(turn, chose.x, chose.y);
-                    boardlogic->getBoard()->add_to_board(d, chose.x, chose.y);
-                    white->add_disc(d);
+                    if((chose.x != 0) && (chose.y != 0)) {
+                        d = Disc(turn, chose.x, chose.y);
+                        boardlogic->getBoard()->add_to_board(d, chose.x, chose.y);
+                        white->add_disc(d);
+                    }
                     break;
                 case E:
                     break;
             }
-
-            boardlogic->flipping(chose.x, chose.y); //makes the move (changes discs on board).
-
+            if((chose.x != 0) && (chose.y != 0)) {
+                boardlogic->flipping(chose.x, chose.y); //makes the move (changes discs on board).
+            }
             switchTurn(false);
         }
 
