@@ -58,7 +58,7 @@ void PlayerClient::connectToServer() {
     if (n == -1) {
         throw "Error reading result from socket";
     }
-    cout << playernumber << endl;
+    cout <<"you are player number: " << playernumber << "your symbol is"<< (char) symbol  << endl;
     cout<<"Connected to server"<<endl;
 }
 
