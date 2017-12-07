@@ -69,7 +69,11 @@ coordinates PlayerClient::makeMove(BoardLogic *bl) const {
 
     if((symbol == X && playernumber == 1) || (symbol == O && playernumber == 2)) {
       coor =  PlayerHuman::makeMove(bl);
-        n = write(clientSocket, &coor, sizeof(coor));
+        n = write(clientSocket, &coor.x, sizeof(coor));
+        if (n == -1) {
+            throw "Error writing result from socket";
+        }
+        n = write(clientSocket, &coor.y, sizeof(coor));
         if (n == -1) {
             throw "Error writing result from socket";
         }
@@ -82,12 +86,16 @@ coordinates PlayerClient::makeMove(BoardLogic *bl) const {
         if (n == -1) {
             throw "Error reading result from socket";
         }
+       /* n = read(clientSocket, &coor.y, sizeof(coor));
+        if (n == -1) {
+            throw "Error reading result from socket";
+        }*/
         return coor;
 
     }
 
 
-    return coordinates();
+
 }
 
 

@@ -33,7 +33,7 @@ GameFlow::GameFlow(const int &n,const int &selected): selected(selected) {
             }
             white = new PlayerClient("127.0.0.1", 8000, O);
             ((PlayerClient *) black)->setClientSocket(((PlayerClient *) black)->getClientSocket());
-            ((PlayerClient *) black)->setPlayerNum(((PlayerClient *) black)->getPlayerNum());
+            ((PlayerClient *) white)->setPlayerNum(((PlayerClient *) black)->getPlayerNum());
             break;
     }
 
