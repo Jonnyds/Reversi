@@ -31,9 +31,6 @@ GameFlow::GameFlow(const int &n,const int &selected): selected(selected) {
             int port;
             ifstream inFile;
             inFile.open("/home/jonathan/CLionProjects/Reversi & tests/src/Reversi/setting.txt");
-            if(!inFile.is_open()){
-                cout << "no no" << endl;
-            }
             inFile >> data;
             cout<<"IP: "<<data<<endl;
             inFile >> port;
