@@ -32,9 +32,7 @@ GameFlow::GameFlow(const int &n,const int &selected): selected(selected) {
             ifstream inFile;
             inFile.open("settingReversi.txt");
             inFile >> data;
-            cout<<"IP: "<<data<<endl;
             inFile >> port;
-            cout<<"port: "<<port<<endl;
             inFile.close();
             const char * serverIP = data.c_str();
 
