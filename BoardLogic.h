@@ -111,14 +111,17 @@ public:
      * @return the opponent player.
      */
     PlayerType* getPlayerOpponent();
+
     /**
      * @return the game's playing board.
      */
     Board* getBoard();
+
     /**
      * swaps between the player_turn and player_opponent when the turn is switched.
      */
     void swapPlayers();
+
     /**
      * Clears the valid_points vector for reuse.
      */

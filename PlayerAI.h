@@ -21,25 +21,20 @@ class PlayerAI: public PlayerType {
 public:
 
     /**
-     * AI player constructor.
-     * @param sym the player's symbol.
-     */
-
-    /**
      * A default AI player constructor.
      */
     PlayerAI();
 
     /**
-     * A virtual function that makes returns the move a player would like to make (AI or console)
+     * A virtual function that makes a deep copy of the BoardLogic object and its members.
      * @param bl the current game's BoardLogic object.
-     * @return the move a player decided on.
+     * @return the new BoardLogic object.
      */
     BoardLogic* createDeepCopyOfLogic(BoardLogic* copybl) const;
 
 
     /**
-     * A virtual function that makes returns the move a player would like to make (AI or console)
+     * A virtual function that makes returns the move a player would like to make (AI, console or remote)
      * @param bl the current game's BoardLogic object.
      * @return the move a player decided on.
      */

@@ -60,7 +60,7 @@ public:
     void copyVector(vector<Disc> copyVec) ;
 
     /**
-     * A virtual function that makes returns the move a player would like to make (AI or console)
+     * A virtual function that makes returns the move a player would like to make (AI, console or remote)
      * @param bl the current game's BoardLogic object.
      * @return the move a player decided on.
      */

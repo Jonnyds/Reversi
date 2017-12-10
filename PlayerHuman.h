@@ -33,8 +33,11 @@ public:
      */
     PlayerHuman();
 
-
-
+    /**
+     * A virtual function that returns the move a player would like to make (AI, console or remote)
+     * @param bl the current game's BoardLogic object.
+     * @return the move a player decided on.
+     */
     virtual coordinates makeMove(BoardLogic *bl) const;
 
     /**

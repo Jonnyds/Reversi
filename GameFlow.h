@@ -77,9 +77,8 @@ private:
     PlayerType* black; // The black player (with symbol X).
     PlayerType* white; // The white player (with symbol O).
     DiscSymbol turn; // Which player does the turn belong to.
-    int no_more_moves;
-    BoardLogic* boardlogic;
-
+    int no_more_moves; // counts the number of turns switched in a row (with no move made).
+    BoardLogic* boardlogic; //the board logic of the game.
 };
 
 

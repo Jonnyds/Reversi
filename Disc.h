@@ -7,6 +7,7 @@
 
 #ifndef REVERSI_DISC_H
 #define REVERSI_DISC_H
+
  /**
   * A date struct representing coordinates.
   */
@@ -28,7 +29,9 @@ enum DiscSymbol {
  * This object represents a single disc on board.
  */
 class Disc {
+
 public:
+
 /**
  * The default disc constructor.
  */
