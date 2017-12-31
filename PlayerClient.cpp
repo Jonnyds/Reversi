@@ -54,6 +54,8 @@ void PlayerClient::connectToServer() {
         throw "Error connecting to server";
     }
 
+
+
     n = read(clientSocket, &playernumber, sizeof(playernumber));
     if (n == -1) {
         throw "Error reading result from socket";
@@ -119,5 +121,31 @@ int PlayerClient::getPlayerNum() {
 
 void PlayerClient::setPlayerNum(int num) {
     playernumber = num;
+}
+
+void PlayerClient::writeCommade() {
+
+    char* cmd;
+    char* space = (char *)' ';
+    int n;
+    
+    while(true) {
+
+        cout << "Please enter a command" << endl;
+        cin >> cmd;
+        char * splitcmd = strtok(cmd,space);
+
+        switch (splitcmd) {
+
+            case "start":
+                n = write(clientSocket, &splitcmd, sizeof(splitcmd));
+                if (n == -1) {
+                    throw "Error writing to socket";
+                }
+
+        }
+
+    }
+
 }
 

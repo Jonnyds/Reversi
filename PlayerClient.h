@@ -53,6 +53,8 @@ class PlayerClient: public PlayerHuman {
      */
         void setPlayerNum(int num);
 
+        void writeCommade();
+
     /**
      * A virtual function that returns the move a player would like to make (AI, console or remote)
      * @param bl the current game's BoardLogic object.

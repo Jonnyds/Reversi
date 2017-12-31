@@ -24,6 +24,7 @@ GameFlow::GameFlow(const int &n,const int &selected): selected(selected) {
             white = new PlayerHuman(O);
             black = new PlayerHuman(X);
             break;
+
         case 3:
 
             string IP;
