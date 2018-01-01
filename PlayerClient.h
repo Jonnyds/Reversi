@@ -53,7 +53,7 @@ class PlayerClient: public PlayerHuman {
      */
         void setPlayerNum(int num);
 
-        void writeCommade();
+        void writeCommande();
 
     /**
      * A virtual function that returns the move a player would like to make (AI, console or remote)

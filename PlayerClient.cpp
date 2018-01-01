@@ -11,6 +11,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sstream>
 
 using namespace std;
 
@@ -58,7 +59,7 @@ void PlayerClient::connectToServer() {
 
     n = read(clientSocket, &playernumber, sizeof(playernumber));
     if (n == -1) {
-        throw "Error reading result from socket";
+        throw "Error reading from socket";
     }
     cout <<"you are player number: " << playernumber << "your symbol is"<< (char) symbol  << endl;
     cout<<"Connected to server"<<endl;
@@ -74,7 +75,7 @@ coordinates PlayerClient::makeMove(BoardLogic *bl) const {
         i = coor.x;
         n = write(clientSocket, &i, sizeof(i));
         if (n == -1) {
-            throw "Error writing result from socket";
+            throw "Error writing to socket";
         }
         j = coor.y;
         n = write(clientSocket, &j, sizeof(j));
@@ -123,28 +124,92 @@ void PlayerClient::setPlayerNum(int num) {
     playernumber = num;
 }
 
-void PlayerClient::writeCommade() {
+void PlayerClient::writeCommande() {
 
-    char* cmd;
-    char* space = (char *)' ';
+    string cmd;
+    vector<string> list;
     int n;
+    int counter = 0;
+    bool validName = false;
 
     while(true) {
 
         cout << "Please enter a command" << endl;
         cin >> cmd;
-        char * splitcmd = strtok(cmd,space);
+        string str(cmd);
+        istringstream iss(str);
+        string command;
+        iss >> command;
 
-        switch (splitcmd) {
+        if (command.compare("start") == 0) {
+            validName = true;
+            n = write(clientSocket, &cmd, sizeof(cmd));
+            if (n == -1) {
+                throw "Error writing to socket";
+            }
+            if (n == 0) {
+                throw "Server disconnected";
+            }
 
-            case "start":
-                n = write(clientSocket, &splitcmd, sizeof(splitcmd));
-                if (n == -1) {
-                    throw "Error writing to socket";
-                }
-
+            break;
         }
 
+        if (command.compare("join") == 0) {
+            validName = true;
+            n = write(clientSocket, "list-games", sizeof("list-games"));
+            if (n == -1) {
+                throw "Error writing to socket";
+            }
+            if (n == 0) {
+                throw "Server disconnected";
+            }
+            n = read(clientSocket, &list, sizeof(list));
+            string nameArg;
+            iss >> nameArg;
+
+            for (int i = 0; i < list.size(); ++i) {
+                if (list[i].compare(nameArg) == 0) {
+
+                    n = write(clientSocket, &cmd, sizeof(cmd));
+                    if (n == -1) {
+                        throw "Error writing to socket";
+                    }
+                    if (n == 0) {
+                        throw "Server disconnected";
+                    }
+                } else {
+                    counter ++;
+                }
+            }
+
+            if (counter == list.size()) {
+                cout << "Please enter a valid name" << endl;
+            }
+
+
+            break;
+        }
+
+        if (command.compare("list-games") == 0) {
+            validName = true;
+            n = write(clientSocket, &cmd, sizeof(cmd));
+            if (n == -1) {
+                throw "Error writing to socket";
+            }
+            if (n == 0) {
+                throw "Server disconnected";
+            }
+
+        n = read(clientSocket, &list, sizeof(list));
+        for (int i = 0; i < list.size(); ++i) {
+            cout << "List of games with one player:" << endl << endl << i + 1 << ". " << list[i] << endl;
+        }
+
+        }
+        if (!validName) {
+            cout << "Please enter a valid command" << endl;
+        }
+validName = false;
     }
 
 }
