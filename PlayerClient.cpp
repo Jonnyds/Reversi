@@ -128,7 +128,7 @@ void PlayerClient::writeCommade() {
     char* cmd;
     char* space = (char *)' ';
     int n;
-    
+
     while(true) {
 
         cout << "Please enter a command" << endl;
