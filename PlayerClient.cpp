@@ -91,6 +91,7 @@ coordinates PlayerClient::makeMove(BoardLogic *bl) const {
         if (n == -1) {
             throw "Error reading result from socket";
         }
+
         n = read(clientSocket, &j, sizeof(j));
         if (n == -1) {
             throw "Error reading result from socket";
