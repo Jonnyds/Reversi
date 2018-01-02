@@ -55,7 +55,7 @@ void PlayerClient::connectToServer() {
         throw "Error connecting to server";
     }
 
-
+    writeCommande();
 
     n = read(clientSocket, &playernumber, sizeof(playernumber));
     if (n == -1) {
@@ -102,9 +102,6 @@ coordinates PlayerClient::makeMove(BoardLogic *bl) const {
         return coor;
 
     }
-
-
-
 }
 
 
