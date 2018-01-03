@@ -125,7 +125,8 @@ void PlayerClient::setPlayerNum(int num) {
 void PlayerClient::writeCommande() {
 
     string scmd;
-    vector<string> list;
+    string list;
+    char name[50];
     int n;
     int counter = 0;
     bool validName = false;
@@ -157,7 +158,7 @@ void PlayerClient::writeCommande() {
 
         if (command.compare("join") == 0) {
             validName = true;
-           /* n = write(clientSocket, "list-games", sizeof("list-games"));
+            n = write(clientSocket, "list-games", sizeof("list-games"));
             if (n == -1) {
                 throw "Error writing to socket";
             }
@@ -186,14 +187,6 @@ void PlayerClient::writeCommande() {
             if (counter == list.size()) {
                 cout << "Please enter a valid name" << endl;
             }
-*/
-            n = write(clientSocket, scmd.c_str(), scmd.length());
-            if (n == -1) {
-                throw "Error writing to socket";
-            }
-            if (n == 0) {
-                throw "Server disconnected";
-            }
             break;
         }
 
@@ -207,9 +200,19 @@ void PlayerClient::writeCommande() {
                 throw "Server disconnected";
             }
 
-        n = read(clientSocket, &list, sizeof(list));
-        for (int i = 0; i < list.size(); ++i) {
-            cout << "List of games with one player:" << endl << endl << i + 1 << ". " << list[i] << endl;
+            int len;
+            n = read(clientSocket, &len, sizeof(len));
+            if (n == -1) {
+                throw "Error writing to socket";
+            }
+            if (n == 0) {
+                throw "Server disconnected";
+            }
+
+        for (int i = 0; i < len; ++i) {
+            n = read(clientSocket, &name, strlen(name));
+            cout << "List of games with one player:" << endl << endl << i + 1 << ". " << name << endl;
+            memset(name, 0, sizeof(name));
         }
 
         }

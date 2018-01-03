@@ -52,7 +52,10 @@ class PlayerClient: public PlayerHuman {
      * @param num the player' number
      */
         void setPlayerNum(int num);
-
+    /*
+     * receives, checks and asks the server for pre game commands given by the player (such as start, join
+     * and asking for a list of games with one player)
+     */
         void writeCommande();
 
     /**
