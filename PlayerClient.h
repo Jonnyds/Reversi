@@ -66,7 +66,11 @@ class PlayerClient: public PlayerHuman {
      * @return the move a player decided on.
      */
         virtual coordinates makeMove(BoardLogic *bl) const;
-
+/**
+ * Converts a char to string
+ * @param some a char array
+ * @return a string with the content of the char array.
+ */
     string convertCharToString (char some[length]);
 
     private:

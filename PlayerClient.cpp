@@ -75,12 +75,22 @@ coordinates PlayerClient::makeMove(BoardLogic *bl) const {
         i = coor.x;
         n = write(clientSocket, &i, sizeof(i));
         if (n == -1) {
-            throw "Error writing to socket";
+            cout << "server disconnected"<< endl;
+            exit(-1);
+        }
+        if (n == 0) {
+            cout << "server disconnected"<< endl;
+            exit(-1);
         }
         j = coor.y;
         n = write(clientSocket, &j, sizeof(j));
         if (n == -1) {
-            throw "Error writing result from socket";
+            cout << "server disconnected"<< endl;
+            exit(-1);
+        }
+        if (n == 0) {
+            cout << "server disconnected"<< endl;
+            exit(-1);
         }
         return coor;
 
@@ -89,17 +99,28 @@ coordinates PlayerClient::makeMove(BoardLogic *bl) const {
         cout << "waiting for the other player's move:" << endl;
         n = read(clientSocket, &i, sizeof(i));
         if (n == -1) {
-            throw "Error reading result from socket";
+            cout << "server disconnected"<< endl;
+            exit(-1);
+        }
+        if (n == 0) {
+            cout << "server disconnected"<< endl;
+            exit(-1);
         }
 
         n = read(clientSocket, &j, sizeof(j));
         if (n == -1) {
-            throw "Error reading result from socket";
+            cout << "server disconnected"<< endl;
+            exit(-1);
         }
-
-        cout << "Your opponent's move is (" << i << ',' << j <<')' <<endl << endl;
-        coor.x = i;
-        coor.y = j;
+        if (n == 0) {
+            cout << "server disconnected"<< endl;
+            exit(-1);
+        }
+        if ((i != -4) && (j != -4)) {
+            cout << "Your opponent's move is (" << i << ',' << j << ')' << endl << endl;
+            coor.x = i;
+            coor.y = j;
+        }
         return coor;
 
     }
@@ -129,6 +150,7 @@ void PlayerClient::writeCommande() {
     int n;
     string requestList = "list-games";
     bool validName = false;
+
     while(true) {
         char name[length];
 
@@ -206,7 +228,6 @@ void PlayerClient::writeCommande() {
                 }
 
             }
-            memset(name, 0, sizeof(name));
             break;
         }
 
@@ -248,10 +269,6 @@ void PlayerClient::writeCommande() {
 
 string PlayerClient::convertCharToString(char some[length]) {
 
-    /*string str;
-    for (int i = 0; i < strlen(some); i++) {
-        str.append(1u ,some[i]);
-    }*/
     string temp(some);
     string str;
     str.append(temp);
