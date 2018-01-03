@@ -126,9 +126,8 @@ void PlayerClient::writeCommande() {
 
     string scmd;
     string list;
-    char name[50];
+    char name[length];
     int n;
-    int counter = 0;
     bool validName = false;
 
     while(true) {
@@ -142,7 +141,7 @@ void PlayerClient::writeCommande() {
         string command;
         iss >> command;
 
-
+        // start command:
         if (command.compare("start") == 0) {
             validName = true;
             n = write(clientSocket, scmd.c_str(), scmd.length());
@@ -156,6 +155,7 @@ void PlayerClient::writeCommande() {
             break;
         }
 
+        // join command:
         if (command.compare("join") == 0) {
             validName = true;
             n = write(clientSocket, "list-games", sizeof("list-games"));
@@ -165,13 +165,25 @@ void PlayerClient::writeCommande() {
             if (n == 0) {
                 throw "Server disconnected";
             }
-            n = read(clientSocket, &list, sizeof(list));
+
             string nameArg;
             iss >> nameArg;
 
-            for (int i = 0; i < list.size(); ++i) {
-                if (list[i].compare(nameArg) == 0) {
+            int len;
+            n = read(clientSocket, &len, sizeof(len));
+            if (n == -1) {
+                throw "Error reading from socket";
+            }
+            if (n == 0) {
+                throw "Server disconnected";
+            }
 
+            for (int i = 0; i < len; ++i) {
+
+                n = read(clientSocket, &name, strlen(name));
+                list = convertCharToString(name);
+
+                if (list.compare(nameArg) == 0) {
                     n = write(clientSocket, scmd.c_str(), scmd.length());
                     if (n == -1) {
                         throw "Error writing to socket";
@@ -180,16 +192,15 @@ void PlayerClient::writeCommande() {
                         throw "Server disconnected";
                     }
                 } else {
-                    counter ++;
+                    cout << "Please enter a valid name" << endl;
                 }
+                memset(name, 0, sizeof(name));
             }
 
-            if (counter == list.size()) {
-                cout << "Please enter a valid name" << endl;
-            }
             break;
         }
 
+        // list-games command:
         if (command.compare("list-games") == 0) {
             validName = true;
             n = write(clientSocket, scmd.c_str(), scmd.length());
@@ -211,7 +222,8 @@ void PlayerClient::writeCommande() {
 
         for (int i = 0; i < len; ++i) {
             n = read(clientSocket, &name, strlen(name));
-            cout << "List of games with one player:" << endl << endl << i + 1 << ". " << name << endl;
+            list = convertCharToString(name);
+            cout << "List of games with one player:" << endl << endl << i + 1 << ". " << list << endl;
             memset(name, 0, sizeof(name));
         }
 
@@ -219,8 +231,18 @@ void PlayerClient::writeCommande() {
         if (!validName) {
             cout << "Please enter a valid command" << endl;
         }
-validName = false;
+
+        validName = false;
+    }
+}
+
+string PlayerClient::convertCharToString(char some[length]) {
+
+    string str;
+    for (int i = 0; i < strlen(some); i++) {
+        str.append(1u ,some[i]);
     }
 
+    return str;
 }
 

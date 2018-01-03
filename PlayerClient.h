@@ -6,7 +6,9 @@
 #define REVERSI_CLIENT_H
 
 
+#include <string>
 #include "PlayerHuman.h"
+const int length = 50;
 
 /**
  * This object inherits from PlayerType (an abstract class) and iד responsible for managing the AI player's
@@ -64,6 +66,8 @@ class PlayerClient: public PlayerHuman {
      * @return the move a player decided on.
      */
         virtual coordinates makeMove(BoardLogic *bl) const;
+
+    string convertCharToString (char some[length]);
 
     private:
         const char *serverIP;
