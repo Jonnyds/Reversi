@@ -102,8 +102,3 @@ Disc d;
 
 }
 
-
-
-// Empty constructor to create an empty object of that type (not initialized).
-
-

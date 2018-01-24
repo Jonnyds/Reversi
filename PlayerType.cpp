@@ -50,7 +50,5 @@ Disc d;
     }
 }
 
-//virtual void PlayerType::makeMove(BoardLogic &bl) const;
-
 
 
